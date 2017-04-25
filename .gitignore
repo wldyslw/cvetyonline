@@ -250,3 +250,10 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+
+# Custom
+
+static/*.js
+static/style/
+static/img/
+static/fonts/
