@@ -253,7 +253,5 @@ paket-files/
 
 # Custom
 
-static/*.js
-static/style/
-static/img/
-static/fonts/
+static/*
+!static/index.html

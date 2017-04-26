@@ -2,6 +2,7 @@ const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
     context: __dirname,
@@ -10,13 +11,13 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, './static'),
+        path: path.resolve(__dirname, './static')
     },
     resolve: {
         extensions: ['.js', '.jsx', '.styl']
     },
     module: {
-        loaders: [
+        rules: [
             {
                 test: /\.jsx?$/,
                 exclude: [/node_modules/],
@@ -38,7 +39,7 @@ module.exports = {
                 loader: 'file-loader?name=fonts/[name].[ext]'
             },
             {
-                test: /\.svg$|\.png|\.jpe?g|\.gif$/,
+                test: /\.svg$|\.png|\.jpe?g|\.gif|\.ico$/,
                 loader: 'file-loader?name=img/[name].[ext]'
             }
         ]
@@ -49,9 +50,12 @@ module.exports = {
             allChunks: true
         }),
         new CleanWebpackPlugin('./static', {
-            exclude:  ['index.html'],
             verbose:  false,
             dry:      false
+        }),
+        new HtmlWebpackPlugin({
+            title: 'CvetyOnline',
+            favicon: './src/assets/img/icon.ico'
         })
     ],
     devServer: {

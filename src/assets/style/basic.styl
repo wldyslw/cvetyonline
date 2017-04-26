@@ -1,0 +1,48 @@
+//color palette
+
+ColorMain = #f55f51;
+ColorGrayLight = whitesmoke;
+ColorGrayMid = gray;
+ColorGrayDark = #444;
+
+//
+
+@font-face {
+    font-family: FontAwesome;
+    src: url('../fonts/fontawesome-webfont.ttf');
+}
+
+* {
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+    font-size: 10px;
+    box-sizing: border-box;
+}
+
+body {
+    overflow-x: hidden;
+    background-color: ColorGrayMid;
+}
+
+a, a:hover {
+    text-decoration: none;
+}
+
+::selection {
+  background-color: #f55f51;
+  color: white;
+}
+::-moz-selection {
+  background-color: #f55f51;
+  color: white;
+}
+
+.noselect {
+    cursor: default;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}

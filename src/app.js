@@ -1,8 +1,17 @@
+import './assets/style/basic';
+import './assets/style/buttons';
+import './assets/style/main';
+
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './assets/style/style';
+
+import Header from './components/header'
+
+const ReactRoot = document.createElement("div");
+ReactRoot.id = 'root';
+document.body.insertBefore(ReactRoot, document.body.firstElementChild);
 
 ReactDOM.render(
-  <h1>Kill yourself.</h1>,
-  document.getElementById('root')
+    <Header />,
+    document.getElementById('root')
 );
