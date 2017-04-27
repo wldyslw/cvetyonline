@@ -35,7 +35,7 @@ module.exports = {
                 })
             },
             {
-                test: /\.woff2?$|\.ttf$|\.eot$/,
+                test: /\.woff2?$|\.ttf$|\.otf$|\.eot$/,
                 loader: 'file-loader?name=fonts/[name].[ext]'
             },
             {
@@ -55,7 +55,9 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: 'CvetyOnline',
-            favicon: './src/assets/img/icon.ico'
+            favicon: './src/assets/img/icon.ico',
+            template: './src/templates/template.ejs',
+            appMountId: 'root'
         })
     ],
     devServer: {

@@ -5,13 +5,25 @@ import './assets/style/main';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-import Header from './components/header'
+import Navbar from './components/header/navbar'
+import Promo from './components/header/promo'
+import Content from './components/content/content-wrapper'
 
-const ReactRoot = document.createElement("div");
-ReactRoot.id = 'root';
-document.body.insertBefore(ReactRoot, document.body.firstElementChild);
+const cat = ['Букеты', 'Цветы', 'Горшки', 'Наши работы', 'Букеты невесты','Подарки'];
+
+class Page extends React.Component {
+    render() {
+        return (
+            <div>
+                <Navbar />
+                <Promo />
+                <Content categories={cat}/>
+            </div>          
+        );
+    }
+}
 
 ReactDOM.render(
-    <Header />,
-    document.getElementById('root')
-);
+        <Page />,
+        document.getElementById('root')
+    );
