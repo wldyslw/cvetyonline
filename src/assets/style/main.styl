@@ -22,8 +22,6 @@ Img-box(addr) {
 }
 
 .navbar {
-    display: flex;
-    align-items: center;
     background-color: ColorGrayLight;
     position: fixed;
     padding: 0 30px;
@@ -34,14 +32,16 @@ Img-box(addr) {
     border-radius: 5px;
     box-shadow: 0 0 5px rgba(0,0,0,.3);
     transition: all .5s;
-    h1 {
-        display: inline-block;
-        font-family: BukhariScript;
-        font-weight: 100;
-        text-align: center;
-        font-size: 2.5rem;
-        color: ColorMain;
-    }
+}
+
+.navbar__logo {
+    display: inline-block;
+    padding-top: 12px;
+    font-family: BukhariScript;
+    font-weight: 100;
+    font-size: 2.5rem;
+    color: ColorMain;
+    margin-right: 30px;
 }
 
 .navbar_expanded {

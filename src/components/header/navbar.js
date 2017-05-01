@@ -25,7 +25,10 @@ export default class Navbar extends React.Component {
     render() {
         return (
             <nav className={'navbar' + (this.state.isExpanded ? ' navbar_expanded' : '')}>
-                <h1>CvetyOnline</h1>
+                <h1 className="navbar__logo">CvetyOnline</h1>
+                <a className="btn navbar__btn">H</a>
+                <a className="btn navbar__btn">Another</a>
+                <a className="btn navbar__btn">Last</a>
             </nav>
         );
     }
