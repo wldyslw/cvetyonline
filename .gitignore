@@ -254,4 +254,4 @@ paket-files/
 # Custom
 
 static/*
-!static/index.html
+dev/*

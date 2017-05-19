@@ -41,6 +41,10 @@ module.exports = {
             {
                 test: /\.svg$|\.png|\.jpe?g|\.gif|\.ico$/,
                 loader: 'file-loader?name=img/[name].[ext]'
+            },
+            {
+                test: /\.json$/,
+                loader: 'file-loader?name=[name].[ext]'
             }
         ]
     },

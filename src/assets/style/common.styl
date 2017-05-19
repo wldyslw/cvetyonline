@@ -1,0 +1,30 @@
+// colors
+ColorRed1 = #E05E5C;
+ColorRed2 = #C0504E;
+ColorRed3 = #fa9896;
+//
+
+btn() {
+    display: inline-block;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    transition: all .2s;
+    &:hover {
+        cursor: pointer;
+    }
+}
+
+btn-solid(borderRad = 50%) {
+    btn();
+    background-color: ColorRed1;
+    color: #fff;
+    font-size: 18px;
+    border-radius: borderRad;
+    box-shadow: 0 1px 0 ColorRed2,
+                0 2px 0 ColorRed2,
+                0 3px 0 ColorRed2;
+    &:hover {
+        background-color: ColorRed2;
+    }
+}
