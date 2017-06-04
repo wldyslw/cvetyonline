@@ -8,33 +8,7 @@ import ReactDOM from 'react-dom';
 import Header from './components/header/header.js'
 import Content from './components/content/content-wrapper.js'
 import Footer from './components/footer/footer.js'
-
-import '../dev/flowers.json'
-
-const getFlowersGrid = (request, callback) => {
-    fetch(request, {method: 'GET'})
-    .then(response => {
-        return response.json();
-    })
-    .then(json => {
-        const flowersDescriber = [];
-        json.forEach(e => {
-            flowersDescriber.push({
-                id: e.ID,
-                name: e.Name,
-                category: e.Category,
-                description: e.Description,
-                price: e.Price,
-                inStock: e.InStock,
-                imgPath: './img/promo2.jpeg'
-            });
-        });
-        return flowersDescriber;
-    })
-    .then(flowersDescriber => {
-        if(callback) callback(flowersDescriber);
-    });
-};
+import flowersMiddleware from './flowersMiddleware'
 
 const Globals = {
     collapsed: false,
@@ -75,8 +49,13 @@ class Page extends React.Component {
             })
         }
     }
+    onAdd(id) {
+        return () => {
+            //
+        }
+    }
     componentWillMount() {
-        getFlowersGrid('../flowers.json', response => {
+        flowersMiddleware('../flowers.json', response => {
             this.setState({
                 flowers: response
             });
