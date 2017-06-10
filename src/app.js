@@ -30,6 +30,7 @@ class Page extends React.Component {
         super(props);
         this.onNavigate = this.onNavigate.bind(this);
         this.onView = this.onView.bind(this);
+        this.onAdd = this.onAdd.bind(this);
         this.state = Globals;
     }
     onNavigate(event) {
@@ -51,7 +52,7 @@ class Page extends React.Component {
     }
     onAdd(id) {
         return () => {
-            //
+            console.log('added#', id);
         }
     }
     componentWillMount() {
@@ -76,6 +77,7 @@ class Page extends React.Component {
                     currentCategory={this.state.currentCategory}
                     cardGridType='catalog'
                     cardOnView={this.onView}
+                    cardOnAdd={this.onAdd}
                     cardsDescriber={this.state.flowers}
                 />
                 <Footer />

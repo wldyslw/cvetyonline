@@ -16,7 +16,7 @@ export default class ContentWrapper extends React.Component {
     contentTypeHandler(contentType) {
         if(contentType == 'cardGrid')
         return (
-            <CardGrid gridType={this.props.cardGridType} category={this.props.currentCategory} viewCallback={this.props.cardOnView} cardsDescriber={this.props.cardsDescriber} />
+            <CardGrid gridType={this.props.cardGridType} category={this.props.currentCategory} viewCallback={this.props.cardOnView} addCallback={this.props.cardOnAdd} cardsDescriber={this.props.cardsDescriber} />
         );
         else if(contentType == 'catalogPage')
         return (

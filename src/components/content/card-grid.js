@@ -21,7 +21,7 @@ export default class Card extends React.Component {
                             <div className="card__caption">
                                 <h2 className="card__header">{ e.name }</h2>
                                 <p className="card__description">{e.description}</p>
-                                {this.props.gridType != 'featured' ? <button onClick={this.props.addToCartCallback} className="card__btn-view">В корзину</button> : ''}
+                                {this.props.gridType != 'featured' ? <button onClick={this.props.addCallback(e.id)} className="card__btn-view">В корзину</button> : ''}
                             </div>
                         </div>
                     );
