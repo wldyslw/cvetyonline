@@ -1,25 +1,17 @@
 # CvetyOnline
 
-Online shop-window.
+Online shop-window backend.
 
-## Deploying 
+## Deploying
 
-Install npm packages:
+Install gems:
 
 ```bash
-npm install
+bundle install
 ```
 
 Then run project locally:
 
 ```bash
-npm start
-```
-
-## Building
-
-If you want to build project: 
-
-```bash
-npm run build
+rails server
 ```
