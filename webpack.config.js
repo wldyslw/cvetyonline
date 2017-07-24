@@ -7,7 +7,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     context: __dirname,
     entry: {
-        bundle: './src/app.js'
+        bundle: './client/app.js'
     },
     output: {
         filename: '[name].js',
@@ -59,8 +59,8 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: 'CvetyOnline',
-            favicon: './src/assets/img/icon.ico',
-            template: './src/templates/template.ejs',
+            favicon: './client/assets/img/icon.ico',
+            template: './client/templates/template.ejs',
             appMountId: 'root'
         })
     ],
