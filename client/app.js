@@ -1,9 +1,10 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { Provider } from 'react-redux'
+import App from './components/App'
+//import { Provider } from 'react-redux'
 import './style'
 
 ReactDOM.render(
-    <div><p>Hello there</p></div>,
+    <App />,
     document.getElementById('root')
 );
