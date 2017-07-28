@@ -59,12 +59,13 @@ module.exports = {
         }),
         new HtmlWebpackPlugin({
             title: 'CvetyOnline',
-            //favicon: './client/assets/img/icon.ico',
+            favicon: './client/assets/images/icon.ico',
             template: './client/templates/template.ejs',
             appMountId: 'root'
         })
     ],
     devServer: {
         contentBase: "./static",
+        historyApiFallback: true
     }
 };

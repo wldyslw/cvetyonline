@@ -1,0 +1,38 @@
+@import '../../colors'
+
+.grid {
+    margin-top: 70px;
+    min-height: 80vh;
+}
+
+.pageheader h1 {
+    font-size: 30px !important;
+    letter-spacing: -2px !important;
+    font-weight: 300 !important;
+}
+
+.caption {
+    font-family: Roboto;
+    font-weight: 300 !important;
+}
+
+.thumbnail {
+    padding: 8px 12px;
+    border: none;
+
+    &:hover {
+        box-shadow: 0 0 20px rgba(0,0,0,.1);
+    }
+}
+
+.carousel .item {
+    height: 60vh !important;
+    overflow: hidden;
+    img {
+        min-width: 100% !important;
+        min-height: 100% !important;
+        @media (max-width: 768px) {
+            min-width: 180% !important;
+        }
+    }
+}

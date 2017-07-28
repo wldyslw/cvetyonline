@@ -1,0 +1,68 @@
+@import '../../colors'
+
+.navitem > a {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+    margin: 0 10px;
+    border-radius: 25px;
+    @media (max-width: 992px) {
+        margin: 0 5px;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+}
+
+.active > a {
+    background-color: ColorRed !important;
+    color: #fff !important;
+} 
+
+.menuitem a {
+    padding: 10px 20px !important;
+}
+
+.cart-badge {
+    margin-left: 5px;
+    background-color: ColorRed;
+}
+
+.card-badge-collapsable {
+    float: right;
+    background-color: ColorRed;
+    margin-right: -10px;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+.navbar {
+    padding: 10px 0;
+    background-color: #fff;
+    border: none;
+
+    .nav {
+        letter-spacing: -1px;
+        .glyphicon { font-size: 15px }
+    }
+
+    .dropdown-menu a {
+        padding: 7px 20px;
+    }
+
+    .navbar-toggle {
+        border: none;
+
+        &:hover, &:active, &:focus {
+            background-color: transparent;
+        }
+    }
+}
+
+.navbar-brand {
+    color: ColorRed !important;
+}
+
+.navbar-brand-custom {
+    padding: 10px 15px;
+}
