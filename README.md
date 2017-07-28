@@ -1,8 +1,8 @@
 # CvetyOnline
 
-Online shop-window backend.
+Online shop-window.
 
-## Deploying
+## Deploying backend
 
 Install gems:
 
@@ -14,4 +14,18 @@ Then run project locally:
 
 ```bash
 rails server
+```
+
+## Deploying frontend
+
+Install npm packages:
+
+```bash
+npm install
+```
+
+Then run project locally:
+
+```bash
+npm start
 ```
