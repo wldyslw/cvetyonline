@@ -22,6 +22,8 @@ gem 'puma', '~> 3.7'
 gem 'devise'
 gem 'activeadmin'
 
+gem 'paperclip'
+
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
