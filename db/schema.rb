@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170728163326) do
+ActiveRecord::Schema.define(version: 20170729141724) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -47,12 +47,15 @@ ActiveRecord::Schema.define(version: 20170728163326) do
     t.string "name"
     t.text "description"
     t.string "category"
-    t.string "image_path"
     t.decimal "price", precision: 10, scale: 2
     t.boolean "in_stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "featured", default: false
+    t.string "image_file_name"
+    t.string "image_content_type"
+    t.integer "image_file_size"
+    t.datetime "image_updated_at"
   end
 
 end
