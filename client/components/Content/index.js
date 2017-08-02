@@ -1,7 +1,9 @@
 import Home from './Home';
 import Catalog from './Catalog';
 // import CatalogPage from './CatalogPage';
-// import Cart from './Cart';
-// import About from './About';
+import NotFound from './NotFound'
+import Delivery from './Delivery'
+import Cart from './Cart';
+import Contacts from './Contacts';
 
-export { Home, Catalog };
+export { Home, Catalog, Cart, Contacts, Delivery, NotFound };

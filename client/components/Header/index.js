@@ -14,23 +14,30 @@ import {
     Button
 } from 'react-bootstrap'
 import { NavLink as Link } from 'react-router-dom'
+import { matchPath, withRouter } from 'react-router'
 import { categories } from '../../constants'
 import { LinkContainer } from 'react-router-bootstrap'
 import './style.styl'
 import '../../assets/images/logo_red.png'
 
-export default class Header extends React.Component {
+const CatalogDropdown = withRouter(({ match, location }) => {
+    //console.log(location);
+    const isActive = !!location.pathname.match(/\/catalog(\/w+)*/g);
+    //console.log(isActive);
+    return <NavDropdown className={`navitem${isActive ? ' active' : ''}`} title="Каталог " id="catalogDropdown">
+        {categories.map((e, i) => (
+            <LinkContainer activeClassName="" key={i} to={`/catalog${''}`}>
+                <MenuItem className="menuitem">{e.ally}</MenuItem>
+            </LinkContainer>
+        ))}
+    </NavDropdown>
+})
+
+class Header extends React.Component {
     constructor(props) {
         super(props);
         this.state= { catalogOpened: false, modalShow: false };
-        this.NavItemLinkHandler = this.NavItemLinkHandler.bind(this);
         this.searchExpander = this.searchExpander.bind(this);
-    }
-
-    NavItemLinkHandler() {
-        // this.setState({
-        //     catalogOpened: true
-        // });
     }
 
     searchExpander() {
@@ -45,7 +52,7 @@ export default class Header extends React.Component {
                 <Navbar.Header>
                     <Navbar.Brand>
                         <Link className="navbar-brand-custom" exact to='/'>
-                            <img height={40} src="./img/logo_red.png" alt="CvetyOnline" />
+                            <img height={30} src="./img/logo_red.png" alt="CvetyOnline" />
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
@@ -56,19 +63,20 @@ export default class Header extends React.Component {
                         <LinkContainer className="navitem" exact to='/'>
                             <NavItem>Главная</NavItem>
                         </LinkContainer>
-                        <NavDropdown className={`navitem${this.state.catalogOpened ? ' active' : ''}`} title="Каталог " id="catalogDropdown">
-                            {categories.map((e, i) => (
-                                <LinkContainer isActive={this.NavItemLinkHandler} activeClassName="" key={i} to='/catalog'>
-                                    <MenuItem className="menuitem">{e.ally}</MenuItem>
-                                </LinkContainer>
-                            ))}
-                        </NavDropdown>
-                        <NavItem className="navitem">Контакты и доставка</NavItem>
+                        <CatalogDropdown />
+                        <LinkContainer className="navitem" exact to='/contacts'>
+                            <NavItem>Контакты</NavItem>
+                        </LinkContainer>
+                        <LinkContainer className="navitem" exact to='/delivery'>
+                            <NavItem>Доставка</NavItem>
+                        </LinkContainer>
                         <NavItem onClick={this.searchExpander} className="navitem"><Glyphicon glyph="search" /></NavItem>
-                        <NavItem className="navitem">
-                            <Glyphicon glyph="shopping-cart" />
-                            <Badge className="cart-badge">0</Badge>
-                        </NavItem>
+                        <LinkContainer activeClassName='' className="navitem" exact to='/cart'>
+                            <NavItem className="navitem">
+                                <Glyphicon glyph="shopping-cart" />
+                                <Badge className="cart-badge">0</Badge>
+                            </NavItem>
+                        </LinkContainer>                        
                     </Nav>
                 </Navbar.Collapse>
                 <Modal show={this.state.modalShow} onHide={this.searchExpander}>
@@ -80,7 +88,7 @@ export default class Header extends React.Component {
                             <InputGroup>
                                 <FormControl type="text" />
                                 <InputGroup.Button>
-                                    <Button onClick={this.searchExpander}><Glyphicon glyph='search' /></Button>
+                                    <Button bsStyle='danger' onClick={this.searchExpander}><Glyphicon glyph='search' /></Button>
                                 </InputGroup.Button>
                             </InputGroup>
                         </FormGroup>
@@ -90,3 +98,5 @@ export default class Header extends React.Component {
         );
     }
 }
+
+export default Header;

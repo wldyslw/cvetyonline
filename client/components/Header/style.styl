@@ -1,20 +1,33 @@
 @import '../../colors'
 
 .navitem > a {
-    padding-left: 20px !important;
-    padding-right: 20px !important;
-    margin: 0 10px;
-    border-radius: 25px;
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin: 0 8px;
+    font-weight: 500;
     @media (max-width: 992px) {
-        margin: 0 5px;
-        padding-left: 15px;
-        padding-right: 15px;
+        margin: 0 4px;
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 
 .active > a {
-    background-color: ColorRed !important;
-    color: #fff !important;
+    position: relative;
+    background-color: #fff !important;
+    color: ColorRed !important;
+    
+    @media(min-width: 768px) {
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            background-color: ColorRed;
+        }
+    }
 } 
 
 .menuitem a {
@@ -37,32 +50,18 @@
 }
 
 .navbar {
-    padding: 10px 0;
     background-color: #fff;
     border: none;
-
-    .nav {
-        letter-spacing: -1px;
-        .glyphicon { font-size: 15px }
-    }
+    box-shadow: 0 0 2px rgba(0,0,0,.2);
 
     .dropdown-menu a {
-        padding: 7px 20px;
+        padding: 8px 20px;
     }
 
     .navbar-toggle {
         border: none;
-
         &:hover, &:active, &:focus {
             background-color: transparent;
         }
     }
-}
-
-.navbar-brand {
-    color: ColorRed !important;
-}
-
-.navbar-brand-custom {
-    padding: 10px 15px;
 }

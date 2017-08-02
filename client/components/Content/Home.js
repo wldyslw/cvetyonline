@@ -1,5 +1,16 @@
 import React from 'react';
-import { Grid, Col, Row, Carousel, Button, ButtonToolbar, ButtonGroup, Badge } from 'react-bootstrap';
+import { 
+    Grid, 
+    Col, 
+    Row, 
+    Carousel, 
+    Button, 
+    ButtonToolbar, 
+    ButtonGroup, 
+    Badge,
+    PageHeader ,
+    Thumbnail
+} from 'react-bootstrap';
 
 export default () => (
     <Grid className='grid'>
@@ -27,5 +38,26 @@ export default () => (
                 </Carousel.Caption>
             </Carousel.Item>
         </Carousel>
+        <Row>
+            <PageHeader className="pageheader">Избранные товары<Badge className="cart-badge">6</Badge></PageHeader>
+            {new Array(12).fill(1).map((e,i) => {
+                return (
+                    <Col key={i} xs={12} sm={6} md={4} lg={3}>
+                        <Thumbnail src='./img/example.jpg'>
+                            <h3 className="text-center">Тюльпаны</h3>
+                            <p className="text-center">Lorem ipsum dolor sit amet.</p>
+                            <div className="text-center">
+                                <ButtonToolbar style={{display: 'inline-block'}}>
+                                    <ButtonGroup>
+                                        <Button  bsStyle="danger">В корзину</Button>
+                                        <Button>Подробнее</Button>
+                                    </ButtonGroup>
+                                </ButtonToolbar>
+                            </div>
+                        </Thumbnail>
+                    </Col>
+                );
+            })}
+        </Row>
     </Grid>
 )

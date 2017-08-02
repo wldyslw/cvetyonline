@@ -4,12 +4,11 @@ import {
     Col,
     Row,
     Media,
-    PageHeader,
-    Badge
+    PageHeader
 } from 'react-bootstrap'
 import {  } from 'react-router-dom'
 
-class Cart extends React.Component {
+class Contacts extends React.Component {
     constructor(props) {
         super(props);
     }
@@ -17,10 +16,10 @@ class Cart extends React.Component {
     render() {
         return (
             <Grid className='grid'>
-                <PageHeader className="pageheader">Корзина<Badge className="cart-badge">23</Badge></PageHeader>
+                <PageHeader className="pageheader">Контакты</PageHeader>
             </Grid>
         );
     }
 }
 
-export default Cart;
+export default Contacts;

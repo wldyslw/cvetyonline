@@ -1,25 +1,35 @@
 import React from 'react'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
-import configureStore from '../configureStore'
 import Header from './Header/index'
 import Footer from './Footer/index'
-import { Catalog, Home } from './Content/index'
+import { Catalog, Home, Cart, Contacts, Delivery, NotFound } from './Content/index'
+import ScrollToTop from './ScrollToTop'
 
-const store = configureStore();
+const renderFullLayout = (Component) => () => (
+    <div>
+        <Header />
+        <Component />
+        <Footer />
+    </div>
+);
 
-export default () => {
+export default (props) => {
     return(
-        <Provider store={store}>
+        <Provider store={props.store}>
             <Router>
-                <div>
-                    <Header />
-                    <Switch>
-                        <Route exact path='/' component={Home} />
-                        <Route path='/catalog' component={Catalog} />
-                    </Switch>
-                    <Footer />
-                </div>
+                <ScrollToTop>
+                    <div>
+                        <Switch>
+                            <Route exact path='/' render={renderFullLayout(Home)} />
+                            <Route path='/catalog' render={renderFullLayout(Catalog)} />
+                            <Route path='/contacts' render={renderFullLayout(Contacts)} />
+                            <Route path='/delivery' render={renderFullLayout(Delivery)} />
+                            <Route path='/cart' render={renderFullLayout(Cart)} />
+                            <Route component={NotFound} />
+                        </Switch>
+                    </div>
+                </ScrollToTop>
             </Router>
         </Provider>
     );
