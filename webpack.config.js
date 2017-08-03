@@ -58,6 +58,7 @@ module.exports = {
             dry:      false
         }),
         new HtmlWebpackPlugin({
+            inject: false,
             title: 'CvetyOnline',
             favicon: './client/assets/images/icon.ico',
             template: './client/templates/template.ejs',
