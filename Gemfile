@@ -18,7 +18,7 @@ gem 'paperclip'
 
 # gem 'capistrano-rails', group: :development
 
-# gem 'rack-cors'
+gem 'rack-cors'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
