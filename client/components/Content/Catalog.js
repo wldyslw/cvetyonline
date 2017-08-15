@@ -2,16 +2,16 @@ import React from 'react';
 import { 
     Grid, 
     Col, 
-    Row, 
-    Carousel, 
-    Thumbnail, 
-    Button, 
-    ButtonGroup, 
-    ButtonToolbar, 
+    Row,
     PageHeader, 
-    Badge,
-    Glyphicon 
+    Badge
 } from 'react-bootstrap'
+import TradingCard from './TradingCard'
+import { withRouter } from 'react-router'
+import { LinkContainer } from 'react-router-bootstrap'
+import { connect } from 'react-redux'
+import { fetchFlowers, addToCart } from '../../actions'
+import { categories } from '../../constants'
 import './style'
 import '../../assets/images/example.jpg'
 import '../../assets/images/example2.jpg'
@@ -19,44 +19,55 @@ import '../../assets/images/example2.jpg'
 class Catalog extends React.Component {
     constructor(props) {
         super(props);
-        this.addToCart = this.addToCart.bind(this);
+        this.state = { pageHeader: 'Каталог' }
+        this.renderCatalog = this.renderCatalog.bind(this);
     }
 
-    addToCart(id) {
-        //console.log('added to cart')
-        return (event) => {
-            event.preventDefault();
-        }
+    componentWillMount() {
+        const location = this.props.location.pathname.split('/').reverse()[0]
+        this.setState({
+            pageHeader: categories.find(cat => cat.name == location).ally
+        })
+        this.props.loadCategory(location.toString());
+    }
+
+    renderCatalog() {
+        if(this.props.flowers.isFetching) return <p>Загрузка...</p>
+        if(!this.props.flowers.payload.length && !this.props.flowers.isFetching)
+            return (<p>Раздел пуст.</p>)
+        return this.props.flowers.payload.map(e => (
+            <Col key={e.id} xs={12} sm={6} md={4} lg={3}>
+                <TradingCard 
+                    onAdd={() => this.props.addToCart(e)}
+                    describer={e}
+                />
+            </Col>        
+        ));
     }
 
     render() {
         return (
-            <Grid className='grid'>
-                <PageHeader className="pageheader">Каталог<Badge className="cart-badge">23</Badge></PageHeader>
-                <Row>
-                    {new Array(24).fill(1).map((e,i) => {
-                        return (
-                            <Col key={i} xs={12} sm={6} md={4} lg={3}>
-                                <Thumbnail src='./img/example.jpg'>
-                                    <h3>Тюльпаны</h3>
-                                    
-                                    <p>Lorem ipsum dolor sit amet</p>
-                                    <hr />
-                                    <Row className='thumbnail__options'>
-                                        <h4 className='pull-left'>1.55 BYN</h4>
-                                        <Button onClick={this.addToCart} className='cart-btn pull-right' bsStyle="danger">
-                                            <Glyphicon glyph='shopping-cart' />
-                                            В корзину
-                                        </Button>
-                                    </Row>
-                                </Thumbnail>
-                            </Col>
-                        );
-                    })}
-                </Row>
-            </Grid>
+            <div>
+                <Grid className='grid'>
+                    <PageHeader className="pageheader">
+                        {this.state.pageHeader}
+                        {this.props.flowers.payload
+                        ? <Badge className="cart-badge">{this.props.flowers.payload.length}</Badge>
+                        : ''}
+                    </PageHeader>
+                    <Row>{this.renderCatalog()}</Row>
+                </Grid>
+            </div>
         );
     }
 }
 
-export default Catalog;
+export default withRouter(connect(
+    state => ({
+        flowers: state.flowers
+    }),
+    dispatch => ({
+        loadCategory(category) { dispatch(fetchFlowers(`/category/${category}`)) },
+        addToCart(product) { dispatch(addToCart(product)) }
+    })
+)(Catalog));

@@ -5,59 +5,77 @@ import {
     Row, 
     Carousel, 
     Button, 
-    ButtonToolbar, 
-    ButtonGroup, 
     Badge,
     PageHeader ,
-    Thumbnail
 } from 'react-bootstrap';
+import { LinkContainer } from 'react-router-bootstrap'
+import TradingCard from './TradingCard'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router'
+import { fetchFlowers, addToCart } from '../../actions'
 
-export default () => (
-    <Grid className='grid'>
-        <Carousel>
-            <Carousel.Item>
-                <img src="./img/example.jpg"/>
-                <Carousel.Caption>
-                    <h3>First slide label</h3>
-                    <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                    <Button bsSize='large' bsStyle='danger'>Узнать больше</Button>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img src="./img/example2.jpg"/>
-                <Carousel.Caption>
-                    <h3>Second slide label</h3>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-            <Carousel.Item>
-                <img src="./img/example.jpg"/>
-                <Carousel.Caption>
-                    <h3>Third slide label</h3>
-                    <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                </Carousel.Caption>
-            </Carousel.Item>
-        </Carousel>
-        <Row>
-            <PageHeader className="pageheader">Избранные товары<Badge className="cart-badge">6</Badge></PageHeader>
-            {new Array(12).fill(1).map((e,i) => {
-                return (
-                    <Col key={i} xs={12} sm={6} md={4} lg={3}>
-                        <Thumbnail src='./img/example.jpg'>
-                            <h3 className="text-center">Тюльпаны</h3>
-                            <p className="text-center">Lorem ipsum dolor sit amet.</p>
-                            <div className="text-center">
-                                <ButtonToolbar style={{display: 'inline-block'}}>
-                                    <ButtonGroup>
-                                        <Button  bsStyle="danger">В корзину</Button>
-                                        <Button>Подробнее</Button>
-                                    </ButtonGroup>
-                                </ButtonToolbar>
-                            </div>
-                        </Thumbnail>
-                    </Col>
-                );
-            })}
-        </Row>
-    </Grid>
-)
+class Home extends React.Component {
+    constructor(props) {
+        super(props);
+        this.renderCatalog = this.renderCatalog.bind(this);
+    }
+
+    componentWillMount() {
+        this.props.loadFeatured();
+    }
+
+    renderCatalog() {
+        if(this.props.flowers.isFetching) return <PageHeader className="pageheader">Загрузка...</PageHeader>
+        if(!this.props.flowers.payload.length && !this.props.flowers.isFetching)
+            return (<p>Раздел пуст.</p>)
+        return (
+            <div>
+                <Carousel>
+                    {this.props.flowers.payload.map((e, i) => {
+                        if(i < 3) return (
+                            <Carousel.Item>
+                                <img src={e.images_path.high}/>
+                                <Carousel.Caption>
+                                    <h3>e.name</h3>
+                                    <p>e.description</p>
+                                    <LinkContainer exact to={`/catalog/${e.category + '/' + e.id}`}>
+                                        <Button bsSize='large' bsStyle='danger'>Узнать больше</Button>
+                                    </LinkContainer>
+                                </Carousel.Caption>
+                            </Carousel.Item>
+                        );
+                    })}
+                </Carousel>
+                <Row>
+                    <PageHeader className="pageheader">Избранные товары<Badge className="cart-badge">{this.props.flowers.payload.length}</Badge></PageHeader>
+                    {this.props.flowers.payload.map(e => (
+                        <Col key={e.id} xs={12} sm={6} md={4} lg={3}>
+                            <TradingCard 
+                                onAdd={() => this.props.addToCart(e)}
+                                describer={e}
+                            />
+                        </Col>
+                    ))}
+                </Row>
+            </div>
+        );
+    }
+
+    render() {
+        return (
+            <Grid className='grid'>
+                {this.renderCatalog()}
+            </Grid>
+        );
+    }
+}
+
+export default connect(
+    state => ({
+        flowers: state.flowers
+    }),
+    dispatch => ({
+        loadFeatured() { dispatch(fetchFlowers('/featured')) },
+        addToCart(product) { dispatch(addToCart(product)) }
+    })
+)(Home)

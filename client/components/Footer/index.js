@@ -8,7 +8,7 @@ export default () => (
     <Grid>
         <Row>
             <Col md={4}>
-                <Image className="footer__logo" src="./img/logo_white.png" responsive />
+                <Image className="footer__logo" src="/img/logo_white.png" responsive />
                 <p>
                     ИП Лапицкая О. А. УНП 291368395 <br />
                     Интернет-магазин внесен в Торговый реестр РБ <br />
