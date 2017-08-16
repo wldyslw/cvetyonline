@@ -27,14 +27,14 @@ class Home extends React.Component {
     renderCatalog() {
         if(this.props.flowers.isFetching) return <PageHeader className="pageheader">Загрузка...</PageHeader>
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching)
-            return (<p>Раздел пуст.</p>)
+            return <PageHeader className="pageheader">Раздел пуст.</PageHeader>
         return (
             <div>
                 <Carousel>
                     {this.props.flowers.payload.map((e, i) => {
                         if(i < 3) return (
-                            <Carousel.Item>
-                                <img src={e.images_path.high}/>
+                            <Carousel.Item key={e.id}>
+                                <img src={e.image_paths.high}/>
                                 <Carousel.Caption>
                                     <h3>e.name</h3>
                                     <p>e.description</p>

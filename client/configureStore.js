@@ -8,7 +8,9 @@ const configureStore = () => {
     const persistedState = loadState();
     const store =  createStore(
         reducers,
-        persistedState,
+        {
+            cart: persistedState.cart
+        },
         applyMiddleware(thunkMiddleware)
     );
 

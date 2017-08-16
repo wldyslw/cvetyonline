@@ -18,8 +18,8 @@ const cart = (state = [], action) => {
 
 const flowers = (state = { isFetching: false, payload: [] }, action) => {
     switch(action.type) {
-        case 'RECIEVE_FLOWERS': return { isFetching: false, payload: action.payload }
-        case 'REQUEST_FLOWERS': return Object.assign({}, state, { isFetching: true })
+        case 'RECIEVE_FLOWERS': return { isFetching: false, payload: action.payload !== undefined ? action.payload : [] } 
+        case 'REQUEST_FLOWERS': return { isFetching: true, payload: [] }
         default: return state;
     }
 }

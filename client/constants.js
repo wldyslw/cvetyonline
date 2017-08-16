@@ -16,6 +16,7 @@ export const lorem = {
 };
 
 export const backend = {
-    hostname: 'http://localhost',
+    hostname: 'http://46.101.155.51',
+    localhostIP: '46.101.155.51',
     requestBasePath: '/api/v1/products'
 };
