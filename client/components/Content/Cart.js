@@ -14,6 +14,7 @@ import {
 import { connect } from 'react-redux'
 import {  } from 'react-router-dom'
 import { removeFromCart } from '../../actions'
+import { backend } from '../../constants'
 
 class Cart extends React.Component {
     constructor(props) {
@@ -49,7 +50,7 @@ class Cart extends React.Component {
                                         <Button onClick={() => this.props.remove(e.flower.id)} className='close'>
                                             <Glyphicon glyph='remove' />
                                         </Button>
-                                        <Image className='cart-img' src='/img/example.jpg' />
+                                        <Image className='cart-img' src={backend.hostname + e.flower.image_paths.thumb} />
                                     </td>
                                     <td>{e.flower.name}</td>
                                     <td className='hidden-xs'>{`${e.flower.price} BYN`}</td>

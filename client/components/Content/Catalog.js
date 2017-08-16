@@ -28,33 +28,35 @@ class Catalog extends React.Component {
         this.props.loadCategory(location.toString());
     }
 
+    componentWillReceiveProps(nextProps) {
+        if(nextProps.location.pathname !== this.props.location.pathname) {
+            const newLocation = nextProps.location.pathname.split('/').reverse()[0]
+            this.props.loadCategory(newLocation.toString());
+        }
+    }
+
     renderCatalog() {
         if(this.props.flowers.isFetching) return <p>Загрузка...</p>
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching) {
-            this.setState({
-                pageHeader: categories.find(cat => cat.name == location).ally
-            });
             return (<p>Раздел пуст.</p>)
         }
-        this.setState({
-            pageHeader: categories.find(cat => cat.name == location).ally
-        });
         return this.props.flowers.payload.map(e => (
             <Col key={e.id} xs={12} sm={6} md={4} lg={3}>
                 <TradingCard 
                     onAdd={() => this.props.addToCart(e)}
                     describer={e}
                 />
-            </Col>        
+            </Col>
         ));
     }
 
     render() {
+        const location = this.props.location.pathname.split('/').reverse()[0];
         return (
             <div>
                 <Grid className='grid'>
                     <PageHeader className="pageheader">
-                        {this.state.pageHeader}
+                        {categories.find(cat => cat.name == location).ally}
                         {this.props.flowers.payload
                         ? <Badge className="cart-badge">{this.props.flowers.payload.length}</Badge>
                         : ''}

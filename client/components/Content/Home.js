@@ -13,6 +13,7 @@ import TradingCard from './TradingCard'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { fetchFlowers, addToCart } from '../../actions'
+import { backend } from '../../constants'
 
 class Home extends React.Component {
     constructor(props) {
@@ -34,10 +35,10 @@ class Home extends React.Component {
                     {this.props.flowers.payload.map((e, i) => {
                         if(i < 3) return (
                             <Carousel.Item key={e.id}>
-                                <img src={e.image_paths.high}/>
+                                <img src={backend.hostname + e.image_paths.high}/>
                                 <Carousel.Caption>
-                                    <h3>e.name</h3>
-                                    <p>e.description</p>
+                                    <h3>{e.name}</h3>
+                                    <p>{e.description}</p>
                                     <LinkContainer exact to={`/catalog/${e.category + '/' + e.id}`}>
                                         <Button bsSize='large' bsStyle='danger'>Узнать больше</Button>
                                     </LinkContainer>

@@ -5,6 +5,7 @@ import {
     Button,
     Glyphicon
 } from 'react-bootstrap';
+import { backend } from '../../constants'
 
 class TradingCard extends React.Component {
     constructor(props) {
@@ -15,7 +16,7 @@ class TradingCard extends React.Component {
         return (
             <div className="thumbnail">
                 <LinkContainer exact to={`/catalog/${this.props.describer.category + '/' + this.props.describer.id}`}>
-                    <img onClick={this.props.onView} role='button' src={this.props.describer.image_paths.medium} alt={this.props.describer.name} />
+                    <img onClick={this.props.onView} role='button' src={backend.hostname + this.props.describer.image_paths.medium} alt={this.props.describer.name} />
                 </LinkContainer>                                        
                 <div className='caption'>
                     <h3>{this.props.describer.name}</h3>                  

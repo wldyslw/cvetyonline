@@ -13,15 +13,15 @@ import {
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
 import Counter from './Counter'
-import { fetchFlowers } from '../../actions'
-import { categories } from '../../constants'
+import { fetchFlowers, addToCart } from '../../actions'
+import { categories, backend } from '../../constants'
 
 class CatalogPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { qnty: 1 };
         this.handleCounter = this.handleCounter.bind(this);
-        this.renderPage = this.renderPage.bind();
+        this.renderPage = this.renderPage.bind(this);
     }
 
     componentWillMount() {
@@ -37,13 +37,15 @@ class CatalogPage extends React.Component {
     }
 
     renderPage() {
+        console.log(this.props.flowers)
         if(this.props.flowers.isFetching) return <p>Загрузка...</p>
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching)
             return (<p>Раздел пуст.</p>)
-        return this.props.flowers.payload.map(e => (
+        const e = this.props.flowers.payload[0];
+        return (
             <div>
                 <Col className='product' xs={12} sm={6}>
-                    <Image className='product-img' src={e.image_paths.high} />
+                    <Image className='product-img' src={backend.hostname + e.image_paths.medium} />
                 </Col>
                 <Col className='product' xs={12} sm={6}>
                         <h3>{e.name}<Badge className="cart-badge">{e.in_stock}</Badge></h3>
@@ -58,8 +60,8 @@ class CatalogPage extends React.Component {
                         В корзину
                     </Button>
                 </Col>
-            </div>      
-        ));
+            </div>
+        );
     }
 
     render() {

@@ -27,5 +27,8 @@ export const fetchFlowers = request => dispatch => {
     const fullRequest = backend.hostname + backend.requestBasePath + request;
     return fetch(fullRequest, {method: 'GET'})
     .then(data => data.json(), err => console.log(`An error occured while fetching of request ${fullRequest}: ${err}`))
-    .then(json => { console.log(json); return dispatch(recieveFlowers(json)) } )
+    .then(json => {
+        console.log(json);
+        return dispatch(recieveFlowers(json.length === undefined ? Array.of(json) : json))
+    } )
 }
