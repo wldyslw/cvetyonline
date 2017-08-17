@@ -17,6 +17,7 @@ Rails.application.routes.draw do
           get 'featured', action: :search, defaults: { featured: true }
         end
       end
+      resources :orders, only: [:create]
     end
   end
 end
