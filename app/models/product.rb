@@ -1,7 +1,7 @@
 class Product < ApplicationRecord
-  has_attached_file :image, styles: (lambda do |attachment|
+  has_attached_file :image, use_timestamp: false, styles: (lambda do |attachment|
     Hash.new.tap do |h|
-      h[:high] = '1024x768>' if attachment.instance.featured
+      h[:high] = '1024x768>' unless attachment.instance.featured
       h[:medium] = '256x192>'
       h[:thumb] = '64x64>'
     end
