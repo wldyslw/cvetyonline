@@ -9,8 +9,11 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins '*'
 
+    resource '/api/v1/orders',
+      headers: :any,
+      methods: %i[post options]
     resource '*',
       headers: :any,
-      methods: %i(get options head)
+      methods: %i[get options head]
   end
 end
