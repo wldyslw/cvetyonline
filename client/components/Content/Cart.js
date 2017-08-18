@@ -19,8 +19,8 @@ import {
     Checkbox
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
-import {  } from 'react-router-dom'
-import { removeFromCart, makeOrder } from '../../actions'
+import { NavLink as Link } from 'react-router-dom'
+import { removeFromCart, makeOrder, clearCart } from '../../actions'
 import { backend } from '../../constants'
 
 class Cart extends React.Component {
@@ -39,12 +39,14 @@ class Cart extends React.Component {
         this.checkoutExpander = this.checkoutExpander.bind(this);
         this.submitOrder = this.submitOrder.bind(this);
         this.handleInputChange = this.handleInputChange.bind(this);
+        this.renderModal = this.renderModal.bind(this);
     }
 
     checkoutExpander() {
         this.setState({
             checkoutExpanded: !this.state.checkoutExpanded
         })
+        if(this.state.ordered) this.props.clearCart();
     }
 
     handleInputChange(event) {
@@ -58,18 +60,70 @@ class Cart extends React.Component {
     }
 
     submitOrder() {
-        console.log('submiting...')
         const callback = thisArg => () => {
             thisArg.setState({
                 ordered: true
             });
-            console.log(this.state);
+            thisArg.setState({
+                checkoutExpanded: true
+            });
         };
         this.props.makeOrder(
             this.props.cart,
             this.state.buyerInfo,
             callback(this)
         );        
+    }
+
+    renderModal(ordered) {
+        if(!ordered) return (
+            <div>
+                <Modal.Body>
+                    <Form horizontal>
+                        <FormGroup controlId="formTel">
+                            <Col componentClass={ControlLabel} sm={2}>
+                                Телефон
+                            </Col>
+                            <Col sm={10}>
+                                <FormControl onChange={this.handleInputChange} name='tel' type="tel" placeholder="" />
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup controlId="formAddress">
+                            <Col componentClass={ControlLabel} sm={2}>
+                                Адрес доставки
+                            </Col>
+                                <Col sm={10}>
+                            <FormControl onChange={this.handleInputChange} name='address' type="text" placeholder="" />
+                        </Col>
+                        </FormGroup>
+
+                        <FormGroup controlId="formComment">
+                            <Col componentClass={ControlLabel} sm={2}>
+                                Комментарии
+                            </Col>
+                            <Col sm={10}>
+                                <FormControl onChange={this.handleInputChange} name='comment' type="text" placeholder="" />
+                            </Col>
+                        </FormGroup>
+                    </Form>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button onClick={this.checkoutExpander} className='cart-btn'>Закрыть</Button>
+                    <Button onClick={this.submitOrder} className='cart-btn' bsStyle="danger">Отправить заказ</Button>
+                </Modal.Footer>
+            </div>
+        );
+        else return (
+            <div>
+                <Modal.Body>
+                    <h4 className='text-center'>Успешно!</h4>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Link exact to='/' role='button' onClick={this.checkoutExpander} className='cart-btn btn btn-danger'>Вернуться на главную</Link>
+                </Modal.Footer>
+            </div>
+        );
     }
 
     render() {
@@ -120,48 +174,7 @@ class Cart extends React.Component {
                     <Modal.Header closeButton>
                         <Modal.Title>Оформление заказа</Modal.Title>
                     </Modal.Header>
-                    <Modal.Body>
-                        {/* <FormGroup>
-                            <InputGroup>
-                                <FormControl type="text" />
-                                <InputGroup.Button>
-                                    <Button bsStyle='danger' onClick={this.checkoutExpander}><Glyphicon glyph='search' /></Button>
-                                </InputGroup.Button>
-                            </InputGroup>
-                        </FormGroup> */}
-                        <Form horizontal>
-                            <FormGroup controlId="formTel">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Телефон
-                                </Col>
-                                <Col sm={10}>
-                                    <FormControl onChange={this.handleInputChange} name='tel' type="tel" placeholder="" />
-                                </Col>
-                            </FormGroup>
-
-                            <FormGroup controlId="formAddress">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Адрес доставки
-                                </Col>
-                                    <Col sm={10}>
-                                <FormControl onChange={this.handleInputChange} name='address' type="text" placeholder="" />
-                            </Col>
-                            </FormGroup>
-
-                            <FormGroup controlId="formComment">
-                                <Col componentClass={ControlLabel} sm={2}>
-                                    Комментарии
-                                </Col>
-                                <Col sm={10}>
-                                    <FormControl onChange={this.handleInputChange} name='comment' type="text" placeholder="" />
-                                </Col>
-                            </FormGroup>
-                        </Form>
-                    </Modal.Body>
-                    <Modal.Footer>
-                        <Button onClick={this.checkoutExpander} className='cart-btn'>Закрыть</Button>
-                        <Button onClick={this.submitOrder} className='cart-btn' bsStyle="danger">Отправить заказ</Button>
-                    </Modal.Footer>
+                    {this.renderModal(this.state.ordered)}
                 </Modal>
             </Grid>
         );
@@ -174,6 +187,7 @@ export default connect(
     }),
     dispatch => ({
         remove(id) { dispatch(removeFromCart(id)) },
-        makeOrder(cart, buyerInfo, callback) { dispatch(makeOrder(cart, buyerInfo, callback)) }
+        makeOrder(cart, buyerInfo, callback) { dispatch(makeOrder(cart, buyerInfo, callback)) },
+        clearCart() { dispatch(clearCart()) }
     })
 )(Cart);

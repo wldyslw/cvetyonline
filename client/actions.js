@@ -13,7 +13,7 @@ export const removeFromCart = (id) => ({
 });
 
 export const clearCart = () => ({
-    type: 'CLEAT_CART'
+    type: 'CLEAR_CART'
 })
 
 const requestFlowers = (request) => ({
@@ -55,16 +55,13 @@ const parseOrder = (cart, buyerInfo) => {
 export const makeOrder = (cart, buyerInfo, callback) => dispatch => {
     const headers = new Headers();
     headers.append('Content-Type', 'application/json');
-    console.log('Starting POST...');
     const body = parseOrder(cart, buyerInfo);
     return fetch(
-        'http://1f5c67b3.ngrok.io/api/v1/orders', 
+        backend.hostname + backend.postBasePath, 
         { method: 'post', headers: headers, body: body })
     .then(
         res => {
             if(callback !== undefined) callback.apply(this);
-            console.log('Done:', res)
-            dispatch(clearCart())
         }, 
         err => console.log('Error occured while recieving order: ', err))
 }
