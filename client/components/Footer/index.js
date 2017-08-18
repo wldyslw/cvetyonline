@@ -16,9 +16,10 @@ export default () => (
                     Свидетельство № 291368395 выдано Пинским городским 
                     исполнительнм комитетом от 27.07.2015
                 </p>
-                <p>©2017 <a href='http://cvetyonline.by'>CvetyOnline</a>. <br/>
-                Дизайн и верстка - <a href='https://vk.com/wldyslw'>Владислав Мальцев</a><br/>
-                Хостинг - <a href='https://hoster.by'>hoster.by</a></p>
+                <p>
+                    ©2017 <a href='http://cvetyonline.by'>CvetyOnline</a>. <br/>
+                    Дизайн и верстка - <a href='https://www.linkedin.com/in/%D0%B2%D0%BB%D0%B0%D0%B4%D0%B8%D1%81%D0%BB%D0%B0%D0%B2-%D0%BC%D0%B0%D0%BB%D1%8C%D1%86%D0%B5%D0%B2-a7b939149/'>Владислав Мальцев</a>
+                </p>
             </Col>
             <Col md={4}>
                 <h4>О нас</h4>

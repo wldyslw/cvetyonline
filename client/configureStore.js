@@ -8,14 +8,12 @@ const configureStore = () => {
     const persistedState = loadState();
     const store =  createStore(
         reducers,
-        {
-            cart: persistedState.cart
-        },
+        persistedState,
         applyMiddleware(thunkMiddleware)
     );
 
     store.subscribe(throttle(() => {
-        saveState(store.getState());
+        saveState({ cart: store.getState().cart });
     }, 1000));
 
     return store;

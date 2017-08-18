@@ -12,6 +12,10 @@ export const removeFromCart = (id) => ({
     id
 });
 
+export const clearCart = () => ({
+    type: 'CLEAT_CART'
+})
+
 const requestFlowers = (request) => ({
     type: 'REQUEST_FLOWERS',
     request
@@ -31,4 +35,36 @@ export const fetchFlowers = request => dispatch => {
         console.log(json);
         return dispatch(recieveFlowers(json.length === undefined ? Array.of(json) : json))
     } )
+}
+
+const parseOrder = (cart, buyerInfo) => {
+    const unit_orders_attributes = cart.map(e => ({
+        product_id: e.flower.id,
+        quantity: e.qnty
+    }));
+    const payload = {        
+        telephone: buyerInfo.tel,
+        pickup: buyerInfo.pickup,
+        address: buyerInfo.address,
+        comment: buyerInfo.comment,
+        unit_orders_attributes
+    }
+    return JSON.stringify({ order: payload });
+}
+
+export const makeOrder = (cart, buyerInfo, callback) => dispatch => {
+    const headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    console.log('Starting POST...');
+    const body = parseOrder(cart, buyerInfo);
+    return fetch(
+        'http://1f5c67b3.ngrok.io/api/v1/orders', 
+        { method: 'post', headers: headers, body: body })
+    .then(
+        res => {
+            if(callback !== undefined) callback.apply(this);
+            console.log('Done:', res)
+            dispatch(clearCart())
+        }, 
+        err => console.log('Error occured while recieving order: ', err))
 }

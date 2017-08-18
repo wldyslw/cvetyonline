@@ -12,6 +12,7 @@ const cart = (state = [], action) => {
             } else return [...state, { flower: action.payload, qnty: action.qnty }]
         }
         case 'REMOVE_FROM_CART': return state.filter(e => e.flower.id !== action.id);
+        case 'CLEAR_CART': return [];
         default: return state;
     }
 };

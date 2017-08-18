@@ -86,7 +86,7 @@ class Header extends React.Component {
                         <LinkContainer className="navitem" exact to='/delivery'>
                             <NavItem>Доставка</NavItem>
                         </LinkContainer>
-                        <NavItem onClick={this.searchExpander} className="navitem"><Glyphicon glyph="search" /></NavItem>
+                        {/* <NavItem onClick={this.searchExpander} className="navitem"><Glyphicon glyph="search" /></NavItem> */}
                         <LinkContainer activeClassName='' className="navitem" exact to='/cart'>
                             <NavItem className="navitem">
                                 <Glyphicon glyph="shopping-cart" />

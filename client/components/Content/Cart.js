@@ -9,16 +9,67 @@ import {
     Button,
     Glyphicon,
     Table,
-    Image
+    Image,
+    Modal,
+    Form,
+    FormControl,
+    FormGroup,
+    InputGroup,
+    ControlLabel,
+    Checkbox
 } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import {  } from 'react-router-dom'
-import { removeFromCart } from '../../actions'
+import { removeFromCart, makeOrder } from '../../actions'
 import { backend } from '../../constants'
 
 class Cart extends React.Component {
     constructor(props) {
         super(props);
+        this.state = { 
+            checkoutExpanded: false, 
+            ordered: false,
+            buyerInfo: {
+                tel: '',
+                address: '',
+                comment: '',
+                pickup: false
+            } 
+        };
+        this.checkoutExpander = this.checkoutExpander.bind(this);
+        this.submitOrder = this.submitOrder.bind(this);
+        this.handleInputChange = this.handleInputChange.bind(this);
+    }
+
+    checkoutExpander() {
+        this.setState({
+            checkoutExpanded: !this.state.checkoutExpanded
+        })
+    }
+
+    handleInputChange(event) {
+        const value = event.target.value.trim();
+        const name = event.target.name;
+        const buyerInfo = this.state.buyerInfo;
+        buyerInfo[name] = value;
+        this.setState({
+            buyerInfo
+        })
+    }
+
+    submitOrder() {
+        console.log('submiting...')
+        const callback = thisArg => () => {
+            thisArg.setState({
+                ordered: true
+            });
+            console.log(this.state);
+        };
+        this.props.makeOrder(
+            this.props.cart,
+            this.state.buyerInfo,
+            callback(this)
+        );        
     }
 
     render() {
@@ -61,10 +112,57 @@ class Cart extends React.Component {
                         </tbody>
                     </Table>
                     <h4 className='pull-right cart-sum'>{`ИТОГO: ${total} BYN`}</h4>
-                    <Button className='cart-btn cart-sum pull-right' bsStyle='danger'>
+                    <Button onClick={this.checkoutExpander} className='cart-btn cart-sum pull-right' bsStyle='danger'>
                         Оформить заказ
                     </Button>
                 </Row>
+                <Modal show={this.state.checkoutExpanded} onHide={this.checkoutExpander}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Оформление заказа</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+                        {/* <FormGroup>
+                            <InputGroup>
+                                <FormControl type="text" />
+                                <InputGroup.Button>
+                                    <Button bsStyle='danger' onClick={this.checkoutExpander}><Glyphicon glyph='search' /></Button>
+                                </InputGroup.Button>
+                            </InputGroup>
+                        </FormGroup> */}
+                        <Form horizontal>
+                            <FormGroup controlId="formTel">
+                                <Col componentClass={ControlLabel} sm={2}>
+                                    Телефон
+                                </Col>
+                                <Col sm={10}>
+                                    <FormControl onChange={this.handleInputChange} name='tel' type="tel" placeholder="" />
+                                </Col>
+                            </FormGroup>
+
+                            <FormGroup controlId="formAddress">
+                                <Col componentClass={ControlLabel} sm={2}>
+                                    Адрес доставки
+                                </Col>
+                                    <Col sm={10}>
+                                <FormControl onChange={this.handleInputChange} name='address' type="text" placeholder="" />
+                            </Col>
+                            </FormGroup>
+
+                            <FormGroup controlId="formComment">
+                                <Col componentClass={ControlLabel} sm={2}>
+                                    Комментарии
+                                </Col>
+                                <Col sm={10}>
+                                    <FormControl onChange={this.handleInputChange} name='comment' type="text" placeholder="" />
+                                </Col>
+                            </FormGroup>
+                        </Form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={this.checkoutExpander} className='cart-btn'>Закрыть</Button>
+                        <Button onClick={this.submitOrder} className='cart-btn' bsStyle="danger">Отправить заказ</Button>
+                    </Modal.Footer>
+                </Modal>
             </Grid>
         );
     }
@@ -75,6 +173,7 @@ export default connect(
         cart: state.cart
     }),
     dispatch => ({
-        remove(id) { dispatch(removeFromCart(id)) }
+        remove(id) { dispatch(removeFromCart(id)) },
+        makeOrder(cart, buyerInfo, callback) { dispatch(makeOrder(cart, buyerInfo, callback)) }
     })
 )(Cart);
