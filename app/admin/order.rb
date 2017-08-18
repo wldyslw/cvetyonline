@@ -8,6 +8,7 @@ ActiveAdmin.register Order do
   # permit_params :telephone, :pickup, :comment, :address
 
   index do
+    script 'setTimeout(location.reload.bind(location), 60000);', type: 'text/javascript'
     selectable_column
     id_column
     %i[telephone pickup address comment].each { |field| column field }
