@@ -25,7 +25,15 @@ ActiveAdmin.register Product do
   form do |f|
     f.semantic_errors
     f.inputs do
-      %i[name description category price image in_stock featured].each { |field| f.input field }
+      %i[name description price image in_stock featured].each { |field| f.input field }
+      f.input :category, as: :select, collection: options_for_select({
+        'Букеты': :bouquets,
+        'Цветы поштучно': :flowers,
+        'Цветы в горшках': :pots,
+        'Наши работы': :handmade,
+        'Букеты невесты': :wedding,
+        'Подарки': :gifts,
+      }, :bouquets)
     end
     f.actions
   end
