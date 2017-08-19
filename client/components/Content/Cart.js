@@ -30,6 +30,7 @@ class Cart extends React.Component {
             checkoutExpanded: false, 
             ordered: false,
             buyerInfo: {
+                name: '',
                 tel: '',
                 address: '',
                 comment: '',
@@ -80,6 +81,15 @@ class Cart extends React.Component {
             <div>
                 <Modal.Body>
                     <Form horizontal>
+                    <FormGroup controlId="formName">
+                            <Col componentClass={ControlLabel} sm={2}>
+                                Ваше имя
+                            </Col>
+                            <Col sm={10}>
+                                <FormControl onChange={this.handleInputChange} name='name' type="text" placeholder="" />
+                            </Col>
+                        </FormGroup>
+
                         <FormGroup controlId="formTel">
                             <Col componentClass={ControlLabel} sm={2}>
                                 Телефон
