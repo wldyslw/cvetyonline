@@ -11,7 +11,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, './static')
+        path: path.resolve(__dirname, './public')
     },
     resolve: {
         extensions: ['.js', '.jsx', '.styl']
@@ -53,7 +53,8 @@ module.exports = {
             filename: 'style/bundle.css',
             allChunks: true
         }),
-        new CleanWebpackPlugin('./static', {
+        new CleanWebpackPlugin('./public', {
+            exclude: [ 'robots.txt' ],
             verbose:  false,
             dry:      false
         }),
@@ -66,7 +67,7 @@ module.exports = {
         })
     ],
     devServer: {
-        contentBase: "./static",
+        contentBase: "./public",
         historyApiFallback: true
     }
 };

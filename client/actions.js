@@ -42,7 +42,8 @@ const parseOrder = (cart, buyerInfo) => {
         product_id: e.flower.id,
         quantity: e.qnty
     }));
-    const payload = {        
+    const payload = {   
+        client_name: buyerInfo.name,
         telephone: buyerInfo.tel,
         pickup: buyerInfo.pickup,
         address: buyerInfo.address,
