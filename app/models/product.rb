@@ -1,11 +1,5 @@
 class Product < ApplicationRecord
-  has_attached_file :image, use_timestamp: false, styles: (lambda do |attachment|
-    Hash.new.tap do |h|
-      h[:high] = '1200x900>' unless attachment.instance.featured
-      h[:medium] = '600x450>'
-      h[:thumb] = '64x64>'
-    end
-  end)
+  has_attached_file :image, use_timestamp: false, styles: { high: '1200x900#', medium: '600x450#', thumb: '64x64#' }
   validates_attachment_content_type :image, content_type: /\Aimage\/.*\z/
 
   def as_json(options)
