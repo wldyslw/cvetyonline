@@ -72,7 +72,9 @@ class Header extends React.Component {
                         </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle />
-                    <Badge className="card-badge-collapsable">0</Badge>
+                    {this.props.cart.length > 0
+                    ? <Badge className="card-badge-collapsable">{this.props.cart.length}</Badge>
+                    : ''}
                 </Navbar.Header>
                 <Navbar.Collapse>
                     <Nav pullRight>
