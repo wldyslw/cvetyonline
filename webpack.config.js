@@ -53,11 +53,11 @@ module.exports = {
             filename: 'style/bundle.css',
             allChunks: true
         }),
-        new CleanWebpackPlugin('./public', {
-            exclude: [ 'robots.txt' ],
-            verbose:  false,
-            dry:      false
-        }),
+        // new CleanWebpackPlugin('./public', {
+        //     exclude: [ 'robots.txt' ],
+        //     verbose:  false,
+        //     dry:      false
+        // }),
         new HtmlWebpackPlugin({
             inject: false,
             title: 'CvetyOnline',
