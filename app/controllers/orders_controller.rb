@@ -1,6 +1,7 @@
 class OrdersController < ApplicationController
   def create
     Order.create(params[:order].permit(
+      :client_name,
       :telephone,
       :pickup,
       :comment,

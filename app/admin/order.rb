@@ -11,7 +11,7 @@ ActiveAdmin.register Order do
     script 'setTimeout(location.reload.bind(location), 60000);', type: 'text/javascript'
     selectable_column
     id_column
-    %i[telephone pickup address comment].each { |field| column field }
+    %i[client_name telephone pickup address comment].each { |field| column field }
     column 'Products' do |order|
       span "#{order.products.count} products in order"
       table do
