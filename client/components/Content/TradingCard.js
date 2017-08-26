@@ -10,7 +10,14 @@ import { backend } from '../../constants'
 class TradingCard extends React.Component {
     constructor(props) {
         super(props);
+        this.parseDescription = this.parseDescription.bind(this);
     };
+
+    parseDescription(description) {
+        return description.length > 65
+        ? `${description.slice(0, 59).trim()}...`
+        : description
+    }
 
     render() {
         return (
@@ -20,7 +27,7 @@ class TradingCard extends React.Component {
                 </LinkContainer>                                        
                 <div className='caption'>
                     <h3>{this.props.describer.name}</h3>                  
-                    <p>{this.props.describer.description}</p>
+                    <p>{this.parseDescription(this.props.describer.description)}</p>
                     <hr />
                     <Row className='thumbnail__options'>
                         <h4 className='pull-left'>{this.props.describer.price}</h4>
