@@ -11,7 +11,7 @@ module.exports = {
     },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, './static')
+        path: path.resolve(__dirname, './public')
     },
     resolve: {
         extensions: ['.js', '.jsx', '.styl']
@@ -53,18 +53,21 @@ module.exports = {
             filename: 'style/bundle.css',
             allChunks: true
         }),
-        new CleanWebpackPlugin('./static', {
-            verbose:  false,
-            dry:      false
-        }),
+        // new CleanWebpackPlugin('./public', {
+        //     exclude: [ 'robots.txt' ],
+        //     verbose:  false,
+        //     dry:      false
+        // }),
         new HtmlWebpackPlugin({
+            inject: false,
             title: 'CvetyOnline',
-            favicon: './client/assets/img/icon.ico',
+            favicon: './client/assets/images/icon.ico',
             template: './client/templates/template.ejs',
             appMountId: 'root'
         })
     ],
     devServer: {
-        contentBase: "./static",
+        contentBase: "./public",
+        historyApiFallback: true
     }
 };

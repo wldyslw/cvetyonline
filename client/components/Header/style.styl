@@ -1,0 +1,67 @@
+@import '../../colors'
+
+.navitem > a {
+    padding-left: 15px !important;
+    padding-right: 15px !important;
+    margin: 0 8px;
+    font-weight: 500;
+    @media (max-width: 992px) {
+        margin: 0 4px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+}
+
+.active > a {
+    position: relative;
+    background-color: #fff !important;
+    color: ColorRed !important;
+    
+    @media(min-width: 768px) {
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            height: 2px;
+            width: 100%;
+            background-color: ColorRed;
+        }
+    }
+} 
+
+.menuitem a {
+    padding: 10px 20px !important;
+}
+
+.cart-badge {
+    margin-left: 5px;
+    background-color: ColorRed;
+}
+
+.card-badge-collapsable {
+    float: right;
+    background-color: ColorRed;
+    margin-right: -10px;
+
+    @media (min-width: 768px) {
+        display: none;
+    }
+}
+
+.navbar {
+    background-color: #fff;
+    border: none;
+    box-shadow: 0 0 2px rgba(0,0,0,.2);
+
+    .dropdown-menu a {
+        padding: 8px 20px;
+    }
+
+    .navbar-toggle {
+        border: none;
+        &:hover, &:active, &:focus {
+            background-color: transparent;
+        }
+    }
+}
