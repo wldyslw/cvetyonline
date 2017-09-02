@@ -6,7 +6,7 @@ class OrdersController < ApplicationController
       :pickup,
       :comment,
       (:address unless params[:order][:pickup]),
-      unit_orders_attributes: [:product_id, :quantity])
+      unit_orders_attributes: [:unit_product_id, :quantity])
     )
   end
 end

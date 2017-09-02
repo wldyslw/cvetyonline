@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819112227) do
+ActiveRecord::Schema.define(version: 20170826165223) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -57,7 +57,6 @@ ActiveRecord::Schema.define(version: 20170819112227) do
     t.string "name"
     t.text "description"
     t.string "category"
-    t.decimal "price", precision: 10, scale: 2
     t.boolean "in_stock"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -70,12 +69,21 @@ ActiveRecord::Schema.define(version: 20170819112227) do
 
   create_table "unit_orders", force: :cascade do |t|
     t.integer "quantity"
-    t.integer "product_id"
     t.integer "order_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "unit_product_id"
     t.index ["order_id"], name: "index_unit_orders_on_order_id"
-    t.index ["product_id"], name: "index_unit_orders_on_product_id"
+    t.index ["unit_product_id"], name: "index_unit_orders_on_unit_product_id"
+  end
+
+  create_table "unit_products", force: :cascade do |t|
+    t.string "property", default: "", null: false
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_unit_products_on_product_id"
   end
 
 end
