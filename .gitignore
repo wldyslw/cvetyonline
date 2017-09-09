@@ -235,4 +235,5 @@ build-iPhoneSimulator/
 # Custom
 
 static/*
+public/*
 dev/*

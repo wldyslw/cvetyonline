@@ -13,7 +13,7 @@ ActiveAdmin.register Order do
     id_column
     %i[client_name telephone pickup address comment].each { |field| column field }
     column 'Products' do |order|
-      span "#{order.products.count} products in order"
+      span "#{order.unit_products.count} products in order"
       table do
         tr do
           th 'Quantity'
@@ -23,27 +23,31 @@ ActiveAdmin.register Order do
           tr do
             td unit_order.quantity, rowspan: 5
             th 'Name'
-            td link_to unit_order.product.name, admin_product_path(unit_order.product), title: unit_order.product.description
+            td(
+              link_to(unit_order.unit_product.product.name, admin_product_path(unit_order.unit_product.product), title: unit_order.unit_product.product.description) +
+              ' ' +
+              link_to("(#{unit_order.unit_product.property.empty? ? 'Default' : unit_order.unit_product.property})", admin_unit_product_path(unit_order.unit_product))
+            )
           end
           tr do
             th 'Category'
-            td unit_order.product.category
+            td unit_order.unit_product.product.category
           end
           tr do
             th 'Price'
-            td unit_order.product.price
+            td unit_order.unit_product.price
           end
           tr do
             th 'In stock'
-            td status_tag(*(unit_order.product.in_stock ? ['Yes', :ok] : ['No']))
+            td status_tag(*(unit_order.unit_product.product.in_stock ? ['Yes', :ok] : ['No']))
           end
           tr do
             th 'Featured'
-            td status_tag(*(unit_order.product.featured ? ['Yes', :ok] : ['No']))
+            td status_tag(*(unit_order.unit_product.product.featured ? ['Yes', :ok] : ['No']))
           end
         end
       end
-      span "#{order.unit_orders.map { |unit_order| unit_order.quantity * unit_order.product.price }.sum} total"
+      span "#{order.unit_orders.map { |unit_order| unit_order.quantity * unit_order.unit_product.price }.sum} total"
     end
     actions
   end

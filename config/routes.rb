@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :products
+    resources :unit_products
   end
 
   scope '/api' do
