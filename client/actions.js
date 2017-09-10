@@ -1,10 +1,11 @@
 import fetch from 'isomorphic-fetch'
 import { backend } from './constants'
 
-export const addToCart = (payload, qnty = 1) => ({
+export const addToCart = (payload, qnty = 1, option = null) => ({
     type: 'ADD_TO_CART',
     payload,
-    qnty
+    qnty,
+    option
 });
 
 export const removeFromCart = (id) => ({
@@ -39,7 +40,7 @@ export const fetchFlowers = request => dispatch => {
 
 const parseOrder = (cart, buyerInfo) => {
     const unit_orders_attributes = cart.map(e => ({
-        product_id: e.flower.id,
+        unit_product_id: e.flower.id,
         quantity: e.qnty
     }));
     const payload = {   

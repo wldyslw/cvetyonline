@@ -8,7 +8,9 @@ import {
     Badge,
     Image,
     Button,
-    Glyphicon
+    Glyphicon,
+    FormControl,
+    FormGroup
 } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
@@ -19,9 +21,11 @@ import { categories, backend } from '../../constants'
 class CatalogPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = { qnty: 1 };
+        this.state = { qnty: 1, option: null };
         this.handleCounter = this.handleCounter.bind(this);
         this.renderPage = this.renderPage.bind(this);
+        this.renderWithOptions = this.renderWithOptions.bind(this);
+        this.changeOption = this.changeOption.bind(this);
     }
 
     componentWillMount() {
@@ -36,8 +40,51 @@ class CatalogPage extends React.Component {
         //console.log(value);
     }
 
+    changeOption(e) {
+        const target = e.target.value;
+        this.setState({
+            option: target !== null ? this.props.flowers.payload[0].unit_products.find(e => e.property === target) : null
+        });
+    }
+
+    renderWithOptions() {
+        const payload = this.props.flowers.payload[0];
+        const unit_products = payload.unit_products;
+        if(unit_products) {
+            return(
+                <div>
+                    <FormGroup controlId="formControlsSelect">
+                        <FormControl onChange={this.changeOption} defaultValue={null} componentClass="select" placeholder="Выберите вариант">
+                            <option value={null}>Выберите вариант</option>
+                            {unit_products.map(e => <option key={e.id} value={e.property}>{e.property}</option> )}
+                        </FormControl>
+                    </FormGroup>
+                    {this.state.option 
+                    ? <div>
+                        <h3 className='product-price'>{this.state.option.price} BYN</h3>
+                        <Counter onChange={this.handleCounter} />
+                        <Button onClick={() => this.props.addToCart(payload, this.state.qnty, this.state.option)} className='cart-btn' bsStyle='danger'>
+                            <Glyphicon glyph='shopping-cart' />
+                            В корзину
+                        </Button>
+                    </div>                    
+                    : ''}
+                </div>
+            );
+        }
+        return (
+            <div>
+                <h3 className='product-price'>{payload.price} BYN</h3>
+                <Counter onChange={this.handleCounter} />
+                <Button onClick={() => this.props.addToCart(payload, this.state.qnty)} className='cart-btn' bsStyle='danger'>
+                    <Glyphicon glyph='shopping-cart' />
+                    В корзину
+                </Button>
+            </div>
+        );
+    }
+
     renderPage() {
-        console.log(this.props.flowers)
         if(this.props.flowers.isFetching) return <p>Загрузка...</p>
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching)
             return (<p>Раздел пуст.</p>)
@@ -48,17 +95,12 @@ class CatalogPage extends React.Component {
                     <Image className='product-img' src={backend.hostname + e.image_paths.medium} />
                 </Col>
                 <Col className='product' xs={12} sm={6}>
-                        <h3>{e.name}<Badge className="cart-badge">{e.in_stock}</Badge></h3>
+                        <h3>{e.name}<Badge className="cart-badge">{e.in_stock ? 'В наличии' : 'Нет в наличии'}</Badge></h3>
                     <p className='text-muted'>{e.description}</p>
                     <p className='text-muted'>
                        { `Категория: ${categories.find(cat => cat.name == e.category).ally}` }
                     </p>
-                    <h3 className='product-price'>{e.price} BYN</h3> 
-                    <Counter onChange={this.handleCounter} />
-                    <Button onClick={() => this.props.addToCart(e, this.state.qnty)} className='cart-btn' bsStyle='danger'>
-                        <Glyphicon glyph='shopping-cart' />
-                        В корзину
-                    </Button>
+                    {this.renderWithOptions()}
                 </Col>
             </div>
         );
@@ -67,7 +109,6 @@ class CatalogPage extends React.Component {
     render() {
         return (
             <Grid className='grid'>
-                {/* <PageHeader className="pageheader">Тюльпаны<Badge className="cart-badge">В наличии</Badge></PageHeader> */}
                 <Row>
                     { this.renderPage() }
                 </Row>
@@ -82,6 +123,6 @@ export default withRouter(connect(
     }),
     dispatch => ({
         loadProductPage(id) { dispatch(fetchFlowers(`/id/${id}`)) },
-        addToCart(product, qnty) { dispatch(addToCart(product, qnty)) }
+        addToCart(product, qnty, option) { dispatch(addToCart(product, qnty, option)) }
     })
 )(CatalogPage));

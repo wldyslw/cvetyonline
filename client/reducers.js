@@ -3,6 +3,10 @@ import { combineReducers } from 'redux';
 const cart = (state = [], action) => {
     switch(action.type) {
         case 'ADD_TO_CART': {
+            if(action.option) {
+                action.payload.id = action.option.id;
+                action.payload.price = action.option.price;
+            }
             if(state.some(e => e.flower.id == action.payload.id)) {
                 const newState = state;
                 newState.map(e => {
