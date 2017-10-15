@@ -28,11 +28,17 @@ const mapStateToDispatch = dispatch => ({
 });
 
 const CatalogDropdown = props => {
+    const title = (
+        <div style={{display: 'inline'}}>
+            <Glyphicon className='nav-icon' glyph="list" />
+            Каталог
+        </div>
+    );
     const { location } = props;
     //console.log(location);
     const isActive = !!location.pathname.match(/\/catalog(\/w+)*/g);
     //console.log(isActive);
-    return <NavDropdown className={`navitem${isActive ? ' active' : ''}`} title="Каталог " id="catalogDropdown">
+    return <NavDropdown className={`navitem${isActive ? ' active' : ''}`} title={title} id="catalogDropdown">
         {categories.map((e, i) => (
             <LinkContainer activeClassName="" key={i} to={`/catalog/${e.name}`}>
                 <MenuItem onClick={() => props.loadCategory(e.name) } className="menuitem">{e.ally}</MenuItem>
@@ -79,14 +85,14 @@ class Header extends React.Component {
                 <Navbar.Collapse>
                     <Nav pullRight>
                         <LinkContainer className="navitem" exact to='/'>
-                            <NavItem>Главная</NavItem>
+                            <NavItem><Glyphicon className='nav-icon' glyph="home" />Главная</NavItem>
                         </LinkContainer>
                         <ConnectedDropdown />
                         <LinkContainer className="navitem" exact to='/contacts'>
-                            <NavItem>Контакты</NavItem>
+                            <NavItem><Glyphicon className='nav-icon' glyph="phone-alt" />Контакты</NavItem>
                         </LinkContainer>
                         <LinkContainer className="navitem" exact to='/delivery'>
-                            <NavItem>Доставка</NavItem>
+                            <NavItem><Glyphicon className='nav-icon' glyph="send" />Доставка</NavItem>
                         </LinkContainer>
                         {/* <NavItem onClick={this.searchExpander} className="navitem"><Glyphicon glyph="search" /></NavItem> */}
                         <LinkContainer activeClassName='' className="navitem" exact to='/cart'>
