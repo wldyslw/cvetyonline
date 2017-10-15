@@ -10,7 +10,8 @@ import {
     Button,
     Glyphicon,
     FormControl,
-    FormGroup
+    FormGroup,
+    Carousel
 } from 'react-bootstrap'
 import { withRouter } from 'react-router'
 import { connect } from 'react-redux'
@@ -26,6 +27,7 @@ class CatalogPage extends React.Component {
         this.renderPage = this.renderPage.bind(this);
         this.renderWithOptions = this.renderWithOptions.bind(this);
         this.changeOption = this.changeOption.bind(this);
+        this.renderImage = this.renderImage.bind(this);
     }
 
     componentWillMount() {
@@ -45,6 +47,24 @@ class CatalogPage extends React.Component {
         this.setState({
             option: target !== null ? this.props.flowers.payload[0].unit_products.find(e => e.property === target) : null
         });
+    }
+
+    renderImage() {
+        const imagePaths = this.props.flowers.payload[0].images.length !== 0 
+        ? this.props.flowers.payload[0].images.map(e => `${backend.hostname + e.high}`)
+        : [];
+        if(imagePaths.length !== 0) return (
+            <Carousel>
+                {imagePaths.map(e => {
+                    return (
+                        <Carousel.Item key={e}>
+                            <img src={e}/>
+                        </Carousel.Item>
+                    );
+                })}
+            </Carousel>
+        );
+        return <Image className='product-img' src='/img/missing.png' />
     }
 
     renderWithOptions() {
@@ -92,7 +112,7 @@ class CatalogPage extends React.Component {
         return (
             <div>
                 <Col className='product' xs={12} sm={6}>
-                    <Image className='product-img' src={backend.hostname + e.image_paths.medium} />
+                    { this.renderImage() }
                 </Col>
                 <Col className='product' xs={12} sm={6}>
                         <h3>{e.name}<Badge className="cart-badge">{e.in_stock ? 'В наличии' : 'Нет в наличии'}</Badge></h3>
