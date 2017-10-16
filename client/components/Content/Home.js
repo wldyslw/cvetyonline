@@ -19,10 +19,16 @@ class Home extends React.Component {
     constructor(props) {
         super(props);
         this.renderCatalog = this.renderCatalog.bind(this);
+        this.renderImage = this.renderImage.bind(this);
     }
 
     componentWillMount() {
         this.props.loadFeatured();
+    }
+
+    renderImage(describer) {
+        const imagePath = describer.images.length !== 0 ? `${backend.hostname + describer.images[0].high}` : '/img/missing.png'
+        return <img src={imagePath} alt={describer.name} />
     }
 
     renderCatalog() {
@@ -31,11 +37,11 @@ class Home extends React.Component {
             return <PageHeader className="pageheader">Раздел пуст.</PageHeader>
         return (
             <div>
-                <Carousel>
+                <Carousel className='carousel-home'>
                     {this.props.flowers.payload.map((e, i) => {
                         if(i < 3) return (
                             <Carousel.Item key={e.id}>
-                                <img src={backend.hostname + e.image_paths.high}/>
+                                { this.renderImage(e) }
                                 <Carousel.Caption>
                                     <h3>{e.name}</h3>
                                     <p>{e.description}</p>

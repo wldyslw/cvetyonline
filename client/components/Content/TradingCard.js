@@ -6,6 +6,7 @@ import {
     Glyphicon
 } from 'react-bootstrap';
 import { backend } from '../../constants'
+import '../../assets/images/missing.png'
 
 class TradingCard extends React.Component {
     constructor(props) {
@@ -13,12 +14,20 @@ class TradingCard extends React.Component {
         this.parseDescription = this.parseDescription.bind(this);
         this.renderPrice = this.renderPrice.bind(this);
         this.renderCartButton = this.renderCartButton.bind(this);
+        this.renderImage = this.renderImage.bind(this);
+        this.parseHeader = this.parseHeader.bind(this);
     };
 
     parseDescription(description) {
-        return description.length > 65
+        return description.length > 60
         ? `${description.slice(0, 59).trim()}...`
         : description
+    }
+
+    parseHeader(header) {
+        return header.length > 15
+        ? `${header.slice(0, 14).trim()}...`
+        : header
     }
 
     renderPrice() {
@@ -28,6 +37,11 @@ class TradingCard extends React.Component {
             return `${Math.min(...priceArr)} — ${Math.max(...priceArr)} BYN`
         }
         else return 'Цену уточняйте';
+    }
+
+    renderImage() {
+        const imagePath = this.props.describer.images.length !== 0 ? `${backend.hostname + this.props.describer.images[0].medium}` : '/img/missing.png'
+        return <img onClick={this.props.onView} role='button' src={imagePath} alt={this.props.describer.name} />
     }
 
     renderCartButton() {
@@ -45,10 +59,10 @@ class TradingCard extends React.Component {
         return (
             <div className="thumbnail">
                 <LinkContainer exact to={`/catalog/${this.props.describer.category + '/' + this.props.describer.id}`}>
-                    <img onClick={this.props.onView} role='button' src={backend.hostname + this.props.describer.image_paths.medium} alt={this.props.describer.name} />
+                    { this.renderImage() }
                 </LinkContainer>                                        
                 <div className='caption'>
-                    <h3>{this.props.describer.name}</h3>                  
+                    <h3>{this.parseHeader(this.props.describer.name)}</h3>                  
                     <p>{this.parseDescription(this.props.describer.description)}</p>
                     <hr />
                     <Row className='thumbnail__options'>
