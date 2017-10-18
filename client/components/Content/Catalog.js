@@ -4,13 +4,15 @@ import {
     Col, 
     Row,
     PageHeader, 
-    Badge
+    Badge,
+    DropdownButton,
+    MenuItem
 } from 'react-bootstrap'
 import TradingCard from './TradingCard'
 import { withRouter } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
 import { connect } from 'react-redux'
-import { fetchFlowers, addToCart } from '../../actions'
+import { fetchFlowers, addToCart, sortFlowers } from '../../actions'
 import { categories } from '../../constants'
 import './style'
 import '../../assets/images/example.jpg'
@@ -40,6 +42,7 @@ class Catalog extends React.Component {
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching) {
             return (<p>Раздел пуст.</p>)
         }
+        this.props.sortFlowers('name');
         return this.props.flowers.payload.map(e => (
             <Col key={e.id} xs={12} sm={6} md={4} lg={3}>
                 <TradingCard 
@@ -60,6 +63,12 @@ class Catalog extends React.Component {
                         {this.props.flowers.payload
                         ? <Badge className="cart-badge">{this.props.flowers.payload.length}</Badge>
                         : ''}
+                        <div className='pull-right'>
+                            <DropdownButton id='sorting' title={`Сортировка `}>
+                                <MenuItem onClick={() => this.props.sortFlowers('name')}>Имя</MenuItem>
+                                <MenuItem onClick={() => this.props.sortFlowers('price')}>Цена</MenuItem>
+                            </DropdownButton>
+                        </div>
                     </PageHeader>
                     <Row>{this.renderCatalog()}</Row>
                 </Grid>
@@ -74,6 +83,7 @@ export default withRouter(connect(
     }),
     dispatch => ({
         loadCategory(category) { dispatch(fetchFlowers(`/category/${category}`)) },
-        addToCart(product) { dispatch(addToCart(product)) }
+        addToCart(product) { dispatch(addToCart(product)) },
+        sortFlowers(order) { dispatch(sortFlowers(order)) }
     })
 )(Catalog));

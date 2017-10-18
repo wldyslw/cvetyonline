@@ -21,10 +21,38 @@ const cart = (state = [], action) => {
     }
 };
 
-const flowers = (state = { isFetching: false, payload: [] }, action) => {
+const sortBy = (state, order) => {
+    switch(order) {
+        case 'name': {
+            const newPayload = state.payload.map(e => e);
+            newPayload.sort((a,b) => {
+                if(a.name < b.name) return -1;
+                if(a.name > b.name) return 1;
+                if(a.name == b.name) return 0;
+            });
+            return { isFetching: state.isFetching, payload: newPayload, order: 'name' }
+        }
+        case 'price': {
+            console.log('sorted by price')
+            return ({ 
+                isFetching: state.isFetching, 
+                payload: state.payload,
+                order: 'price'
+            });
+        }
+    }
+}
+
+const flowers = (state = { isFetching: false, payload: [], order: '' }, action) => {
     switch(action.type) {
         case 'RECIEVE_FLOWERS': return { isFetching: false, payload: action.payload !== undefined ? action.payload : [] } 
         case 'REQUEST_FLOWERS': return { isFetching: true, payload: [] }
+        case 'SORT_FLOWERS': {
+            if(state.isFetching !== true && action.order !== state.order) {
+                return sortBy(state, action.order);
+            }
+            return state;
+        }
         default: return state;
     }
 }

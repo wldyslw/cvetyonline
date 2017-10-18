@@ -27,6 +27,11 @@ const recieveFlowers = (payload) => ({
     payload
 })
 
+export const sortFlowers = (order) => ({
+    type: 'SORT_FLOWERS',
+    order
+})
+
 export const fetchFlowers = request => dispatch => {
     dispatch(requestFlowers(request));
     const fullRequest = backend.hostname + backend.requestBasePath + request;
