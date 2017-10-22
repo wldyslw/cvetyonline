@@ -1,4 +1,5 @@
 import { combineReducers } from 'redux';
+import naturalCompare from 'string-natural-compare'
 
 const cart = (state = [], action) => {
     switch(action.type) {
@@ -21,22 +22,38 @@ const cart = (state = [], action) => {
     }
 };
 
+naturalCompare.alphabet = 'АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯабвгдеёжзийклмнопрстуфхцчшщъыьэюя';
+
 const sortBy = (state, order) => {
+    const newPayload = state.payload.map(e => e);
     switch(order) {
         case 'name': {
-            const newPayload = state.payload.map(e => e);
+            console.log('sorted by name');
             newPayload.sort((a,b) => {
-                if(a.name < b.name) return -1;
-                if(a.name > b.name) return 1;
-                if(a.name == b.name) return 0;
+                return naturalCompare(a.name, b.name);
             });
-            return { isFetching: state.isFetching, payload: newPayload, order: 'name' }
-        }
-        case 'price': {
-            console.log('sorted by price')
             return ({ 
                 isFetching: state.isFetching, 
-                payload: state.payload,
+                payload: newPayload, 
+                order: 'name' 
+            });
+        }
+        case 'price': {
+            const minPrice = product => Math.min(...product.unit_products.map(e => e.price));
+            console.log('sorted by price');
+            newPayload.sort((a,b) => {
+                if(a.price && b.price) return a.price - b.price;
+                if(a.price && b.unit_products) 
+                    return a.price - minPrice(b);
+                if(a.unit_products && b.price) 
+                    return minPrice(a) - b.price;
+                if(a.unit_products && b.unit_products) 
+                    return minPrice(a) - minPrice(b);
+                else return 1;
+            });
+            return ({ 
+                isFetching: state.isFetching, 
+                payload: newPayload,
                 order: 'price'
             });
         }

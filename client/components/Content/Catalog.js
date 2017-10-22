@@ -42,7 +42,7 @@ class Catalog extends React.Component {
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching) {
             return (<p>Раздел пуст.</p>)
         }
-        this.props.sortFlowers('name');
+        if(!this.props.flowers.order) this.props.sortFlowers('name');
         return this.props.flowers.payload.map(e => (
             <Col key={e.id} xs={12} sm={6} md={4} lg={3}>
                 <TradingCard 
