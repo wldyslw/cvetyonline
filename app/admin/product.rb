@@ -45,7 +45,7 @@ ActiveAdmin.register Product do
     end
     f.inputs do
       f.has_many :product_images, allow_destroy: true do |ff|
-        ff.input :image
+        ff.input :image, hint: image_tag(ff.object.image.url(:thumb))
       end
     end
     f.actions
