@@ -12,6 +12,8 @@ gem 'rails', '~> 5.1.1'
 # gem 'redis', '~> 3.0'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'activeadmin'
+gem 'activeadmin-orderable'
+gem 'acts_as_list'
 gem 'bcrypt', platforms: :ruby
 gem 'devise'
 gem 'paperclip'

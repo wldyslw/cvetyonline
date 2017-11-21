@@ -1,18 +1,14 @@
 ActiveAdmin.register Product do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
+  config.sort_order = 'position_asc'
+  config.paginate = false
+
   permit_params :name, :description, :category, :in_stock, :featured, unit_products_attributes: [:id, :property, :price, :_destroy], product_images_attributes: [:id, :image, :_destroy]
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+
+  orderable
 
   index do
+    a 'Reset the order', href: 'products'
+    orderable_handle_column
     selectable_column
     id_column
     %i[name description category in_stock featured].each { |field| column field }
@@ -34,12 +30,12 @@ ActiveAdmin.register Product do
     f.inputs do
       %i[name description in_stock featured].each { |field| f.input field }
       f.input :category, as: :select, collection: options_for_select({
-        'Букеты': :bouquets,
-        'Цветы поштучно': :flowers,
-        'Цветы в горшках': :pots,
-        'Наши работы': :handmade,
-        'Букеты невесты': :wedding,
-        'Подарки': :gifts,
+        'Букеты' => :bouquets,
+        'Цветы поштучно' => :flowers,
+        'Цветы в горшках' => :pots,
+        'Наши работы' => :handmade,
+        'Букеты невесты' => :wedding,
+        'Подарки' => :gifts
       }, :bouquets)
     end
     f.inputs do
