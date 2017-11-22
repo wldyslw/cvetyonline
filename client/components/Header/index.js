@@ -23,35 +23,6 @@ import { fetchFlowers } from '../../actions'
 import './style.styl'
 import '../../assets/images/logo_red.png'
 
-const mapStateToDispatch = dispatch => ({
-    loadCategory(category) { dispatch(fetchFlowers(`/category/${category}`)) }
-});
-
-const CatalogDropdown = props => {
-    const title = (
-        <div style={{display: 'inline'}}>
-            <Glyphicon className='nav-icon' glyph="list" />
-            Каталог
-        </div>
-    );
-    const { location } = props;
-    //console.log(location);
-    const isActive = !!location.pathname.match(/\/catalog(\/w+)*/g);
-    //console.log(isActive);
-    return <NavDropdown className={`navitem${isActive ? ' active' : ''}`} title={title} id="catalogDropdown">
-        {categories.map((e, i) => (
-            <LinkContainer activeClassName="" key={i} to={`/catalog/${e.name}`}>
-                <MenuItem onClick={() => props.loadCategory(e.name) } className="menuitem">{e.ally}</MenuItem>
-            </LinkContainer>
-        ))}
-    </NavDropdown>
-}
-
-const ConnectedDropdown = compose(
-    withRouter,
-    connect(state => state, mapStateToDispatch)
-)(CatalogDropdown)
-
 class Header extends React.Component {
     constructor(props) {
         super(props);
@@ -66,9 +37,14 @@ class Header extends React.Component {
     }
 
     render() {
-        // console.log(this.props.location.pathname.split('/').reverse()[0]);
-        // const location = this.props.location.pathname.split('/').reverse()[0]
-        // this.props.loadCategory(location.toString());
+        const title = (
+            <div style={{display: 'inline'}}>
+                <Glyphicon className='nav-icon' glyph="list" />
+                Каталог
+            </div>
+        );
+        const location = this.props.location;
+        const isActive = !!location.pathname.match(/\/catalog(\/w+)*/g);
         return (
             <Navbar fixedTop collapseOnSelect>
                 <Navbar.Header>
@@ -87,7 +63,13 @@ class Header extends React.Component {
                         <LinkContainer className="navitem" exact to='/'>
                             <NavItem><Glyphicon className='nav-icon' glyph="home" />Главная</NavItem>
                         </LinkContainer>
-                        <ConnectedDropdown />
+                        <NavDropdown className={`navitem${isActive ? ' active' : ''}`} title={title} id="catalogDropdown1">
+                            {categories.map((e, i) => (
+                                <LinkContainer activeClassName="" key={i} to={`/catalog/${e.name}`}>
+                                    <MenuItem onClick={() => this.props.loadCategory(e.name) } className="menuitem">{e.ally}</MenuItem>
+                                </LinkContainer>
+                            ))}
+                        </NavDropdown>
                         <LinkContainer className="navitem" exact to='/contacts'>
                             <NavItem><Glyphicon className='nav-icon' glyph="phone-alt" />Контакты</NavItem>
                         </LinkContainer>
