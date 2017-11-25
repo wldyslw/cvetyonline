@@ -36,7 +36,7 @@ ActiveAdmin.register Product do
         'Наши работы' => :handmade,
         'Букеты невесты' => :wedding,
         'Подарки' => :gifts
-      }, :bouquets)
+      }, f.object.category || :bouquets)
     end
     f.inputs do
       f.has_many :unit_products, allow_destroy: true do |ff|
