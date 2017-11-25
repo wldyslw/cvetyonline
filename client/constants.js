@@ -4,9 +4,10 @@ export const categories = [
     { name: 'bouquets', ally: 'Букеты' },
     { name: 'flowers', ally: 'Цветы поштучно' },
     { name: 'pots', ally: 'Цветы в горшках' },
-    { name: 'handmade', ally: 'Наши работы' },
+    { name: 'handmade', ally: 'Цветочные композиции' },
     { name: 'wedding', ally: 'Букеты невесты' },
-    { name: 'gifts', ally: 'Подарки' }
+    { name: 'gifts', ally: 'Подарки' },
+    //{name: '', ally: 'Фейерверки'}
 ];
 
 export const lorem = {
