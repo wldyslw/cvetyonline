@@ -15,8 +15,6 @@ import { connect } from 'react-redux'
 import { fetchFlowers, addToCart, sortFlowers } from '../../actions'
 import { categories } from '../../constants'
 import './style'
-import '../../assets/images/example.jpg'
-import '../../assets/images/example2.jpg'
 
 class Catalog extends React.Component {
     constructor(props) {
