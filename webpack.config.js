@@ -64,7 +64,8 @@ module.exports = {
             favicon: './client/assets/images/icon.ico',
             template: './client/templates/template.ejs',
             appMountId: 'root'
-        })
+        }),
+        new webpack.optimize.UglifyJsPlugin()
     ],
     devServer: {
         contentBase: "./public",
