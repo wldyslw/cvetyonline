@@ -1,4 +1,6 @@
 class Product < ApplicationRecord
+  acts_as_list
+
   has_many :unit_products, dependent: :delete_all
   has_many :product_images, dependent: :delete_all
   accepts_nested_attributes_for :unit_products, allow_destroy: true
