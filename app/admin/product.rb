@@ -6,12 +6,32 @@ ActiveAdmin.register Product do
 
   orderable
 
+  preserve_default_filters!
+  filter :category, as: :select, collection: {
+    'Букеты' => :bouquets,
+    'Цветы поштучно' => :flowers,
+    'Цветы в горшках' => :pots,
+    'Наши работы' => :handmade,
+    'Букеты невесты' => :wedding,
+    'Подарки' => :gifts
+  }.to_a
+
   index do
     a 'Reset the order', href: 'products'
     orderable_handle_column
     selectable_column
     id_column
-    %i[name description category in_stock featured].each { |field| column field }
+    %i[name description in_stock featured].each { |field| column field }
+    column :category do |product|
+      {
+        'bouquets' => 'Букеты',
+        'flowers' => 'Цветы поштучно',
+        'pots' => 'Цветы в горшках',
+        'handmade' => 'Наши работы',
+        'wedding' => 'Букеты невесты',
+        'gifts' => 'Подарки'
+      }[product.category]
+    end
     column :unit_products do |product|
       ul do
         product.unit_products.each { |up| li link_to "#{up.property.empty? ? 'Default' : up.property}, #{up.price}", admin_unit_product_path(up) }
