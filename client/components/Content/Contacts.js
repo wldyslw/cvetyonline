@@ -33,9 +33,6 @@ class Contacts extends React.Component {
                 <PageHeader className="pageheader">Контакты</PageHeader>
                 <p style={{fontSize: 18, fontWeight: 300}}>
                     ИП Лапицкая О. А. УНП 291368395 <br />
-                    Интернет-магазин внесен в Торговый реестр РБ <br />
-                    Регистрационный номер: 365314 <br />
-                    Свидетельство № 291368395 выдано Пинским городским исполнительнм комитетом от 27.07.2015
                 </p>
                 <p style={{fontSize: 22, fontWeight: 300}}>Вы всегда можете связаться с нами:</p>
                 <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='home' /> г.Минск, ул. 50 лет Победы, 5а</p>
