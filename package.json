@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "description": "CvetyOnline web page template",
   "scripts": {
-    "start": "webpack-dev-server --progress --colors",
-    "build": "webpack --progress --colors"
+    "start": "webpack-dev-server --progress --colors --config webpack.dev.js",
+    "build": "webpack --progress --colors --config webpack.prod.js"
   },
   "repository": {
     "type": "git",
@@ -47,6 +47,7 @@
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
     "webpack": "^2.4.1",
-    "webpack-dev-server": "^2.4.4"
+    "webpack-dev-server": "^2.4.4",
+    "webpack-merge": "^4.1.1"
   }
 }
