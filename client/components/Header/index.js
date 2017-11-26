@@ -74,17 +74,17 @@ class Header extends React.Component {
                             <NavItem><Glyphicon className='nav-icon' glyph="phone-alt" />Контакты</NavItem>
                         </LinkContainer>
                         <LinkContainer className="navitem" exact to='/delivery'>
-                            <NavItem><Glyphicon className='nav-icon' glyph="send" />Доставка</NavItem>
+                            <NavItem><Glyphicon className='nav-icon' glyph="send" />Условия покупки</NavItem>
                         </LinkContainer>
                         {/* <NavItem onClick={this.searchExpander} className="navitem"><Glyphicon glyph="search" /></NavItem> */}
-                        <LinkContainer activeClassName='' className="navitem" exact to='/cart'>
+                        {/* <LinkContainer activeClassName='' className="navitem" exact to='/cart'>
                             <NavItem className="navitem">
                                 <Glyphicon glyph="shopping-cart" />
                                 {this.props.cart.length > 0
                                 ? <Badge className="cart-badge">{this.props.cart.length}</Badge>
                                 : ''}
                             </NavItem>
-                        </LinkContainer>                        
+                        </LinkContainer>                         */}
                     </Nav>
                 </Navbar.Collapse>
                 <Modal show={this.state.modalShow} onHide={this.searchExpander}>

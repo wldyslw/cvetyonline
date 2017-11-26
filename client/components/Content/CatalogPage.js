@@ -120,7 +120,7 @@ class CatalogPage extends React.Component {
                     <p className='text-muted'>
                        { `Категория: ${categories.find(cat => cat.name == e.category).ally}` }
                     </p>
-                    {this.renderWithOptions()}
+                    {/* {this.renderWithOptions()} */}
                 </Col>
             </div>
         );
