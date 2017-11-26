@@ -8,7 +8,6 @@
 .pageheader h1 {
     font-size: 30px !important;
     font-weight: 300 !important;
-    text-align: center;
 }
 
 .caption {
@@ -21,6 +20,15 @@
     border: none;
     box-shadow: 0 0 1px rgba(0,0,0,.2);
 
+    p {
+        height: 40px;
+    }
+
+    img {
+        margin: auto;
+        height: 230px;
+    }
+
     &:hover {
         box-shadow: 0 0 20px rgba(0,0,0,.1);
     }
@@ -32,18 +40,26 @@
 }
 
 .thumbnail__options {
-    padding: 0 10px;
+    padding: 0 15px;
 }
 
-.carousel {
+.carousel-home {
+    .btn {
+        margin: 20px 0;
+    }
     .item {
-        height: 80vh !important;
+        height: 500px !important;
         overflow: hidden;
+        @media(max-width: 576px) {
+            height: 400px !important;  
+        }
         img {
-            min-width: 100% !important;
-            min-height: 100% !important;
-            @media (max-width: 768px) {
-                min-width: 180% !important;
+            @media(max-width: 768px) {
+                min-width: 130%;
+            }
+            @media(max-width: 576px) {
+                min-width: 200%;
+                transform: translateX(-25%);
             }
         }
     }

@@ -4,7 +4,9 @@ import {
     Col,
     Row,
     Media,
-    PageHeader
+    PageHeader,
+    Glyphicon,
+    Button
 } from 'react-bootstrap'
 import {  } from 'react-router-dom'
 
@@ -16,7 +18,27 @@ class Contacts extends React.Component {
     render() {
         return (
             <Grid className='grid'>
+                <PageHeader className="pageheader">О нас</PageHeader>
+                <p style={{fontSize: 18, fontWeight: 300}}>
+                    Наши флористы специализируются на классических и авторских букетах, 
+                    работают с интересом и душой, а значит каждый заказ, будь то 
+                    круглый букет из роз, композиция из орхидей или корзина с тюльпанами, 
+                    будет особенным!   
+                </p>
+                <p style={{fontSize: 18, fontWeight: 300}}>
+                    Мы особенно ответственно подходим к качеству и стандартам, Вы можете 
+                    быть уверены: букет попадет к получателю в безупречном состоянии! 
+                    Дело за малым - выбрать цветы, подумать о красивой подписи и позвонить нам!
+                </p>
                 <PageHeader className="pageheader">Контакты</PageHeader>
+                <p style={{fontSize: 18, fontWeight: 300}}>
+                    ИП Лапицкая О. А. УНП 291368395 <br />
+                </p>
+                <p style={{fontSize: 22, fontWeight: 300}}>Вы всегда можете связаться с нами:</p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='home' /> г.Минск, ул. 50 лет Победы, 5а</p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /> +375-29-175-08-80</p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /> +375-33-377-08-80</p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='envelope' /> booket@yandex.by</p>
             </Grid>
         );
     }

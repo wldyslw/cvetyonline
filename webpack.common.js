@@ -63,11 +63,8 @@ module.exports = {
             title: 'CvetyOnline',
             favicon: './client/assets/images/icon.ico',
             template: './client/templates/template.ejs',
-            appMountId: 'root'
+            appMountId: 'root',
+            version: '1.4'
         })
-    ],
-    devServer: {
-        contentBase: "./public",
-        historyApiFallback: true
-    }
+    ]
 };

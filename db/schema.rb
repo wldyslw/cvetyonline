@@ -10,21 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170819112227) do
-
-  create_table "active_admin_comments", force: :cascade do |t|
-    t.string "namespace"
-    t.text "body"
-    t.string "resource_type"
-    t.integer "resource_id"
-    t.string "author_type"
-    t.integer "author_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_type", "author_id"], name: "index_active_admin_comments_on_author_type_and_author_id"
-    t.index ["namespace"], name: "index_active_admin_comments_on_namespace"
-    t.index ["resource_type", "resource_id"], name: "index_active_admin_comments_on_resource_type_and_resource_id"
-  end
+ActiveRecord::Schema.define(version: 20171121202301) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -44,38 +30,50 @@ ActiveRecord::Schema.define(version: 20170819112227) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.string "telephone"
-    t.boolean "pickup"
+    t.string "client_name", null: false
+    t.string "telephone", null: false
+    t.boolean "pickup", null: false
     t.string "address"
-    t.text "comment", default: ""
+    t.text "comment"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "client_name"
+  end
+
+  create_table "product_images", force: :cascade do |t|
+    t.string "image_file_name", null: false
+    t.string "image_content_type", null: false
+    t.integer "image_file_size", null: false
+    t.datetime "image_updated_at", null: false
+    t.integer "product_id", null: false
+    t.index ["product_id"], name: "index_product_images_on_product_id"
   end
 
   create_table "products", force: :cascade do |t|
-    t.string "name"
-    t.text "description"
-    t.string "category"
-    t.decimal "price", precision: 10, scale: 2
-    t.boolean "in_stock"
+    t.string "name", null: false
+    t.text "description", null: false
+    t.string "category", null: false
+    t.boolean "in_stock", null: false
+    t.boolean "featured", default: false, null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "featured", default: false
-    t.string "image_file_name"
-    t.string "image_content_type"
-    t.integer "image_file_size"
-    t.datetime "image_updated_at"
+    t.integer "position"
   end
 
   create_table "unit_orders", force: :cascade do |t|
-    t.integer "quantity"
-    t.integer "product_id"
-    t.integer "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.integer "quantity", null: false
+    t.integer "product_id", null: false
+    t.integer "order_id", null: false
     t.index ["order_id"], name: "index_unit_orders_on_order_id"
     t.index ["product_id"], name: "index_unit_orders_on_product_id"
+  end
+
+  create_table "unit_products", force: :cascade do |t|
+    t.string "property"
+    t.decimal "price", precision: 10, scale: 2, null: false
+    t.integer "product_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["product_id"], name: "index_unit_products_on_product_id"
   end
 
 end
