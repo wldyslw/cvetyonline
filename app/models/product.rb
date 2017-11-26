@@ -8,7 +8,7 @@ class Product < ApplicationRecord
 
   def as_json(_options)
     {}.tap do |h|
-      %i[id name description category in_stock featured].each { |key| h[key] = send(key) }
+      %i[id position name description category in_stock featured].each { |key| h[key] = send(key) }
       h[:images] = product_images.map { |image_record| image_record.image.styles.keys.map { |style| [style, image_record.image.url(style)] }.to_h }
       if unit_products.count == 1
         h[:price] = unit_products[0].price

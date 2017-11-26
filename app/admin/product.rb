@@ -2,7 +2,7 @@ ActiveAdmin.register Product do
   config.sort_order = 'position_asc'
   config.paginate = false
 
-  permit_params :name, :description, :category, :in_stock, :featured, unit_products_attributes: [:id, :property, :price, :_destroy], product_images_attributes: [:id, :image, :_destroy]
+  permit_params :name, :description, :category, :in_stock, :featured, :position, unit_products_attributes: [:id, :property, :price, :_destroy], product_images_attributes: [:id, :image, :_destroy]
 
   orderable
 
