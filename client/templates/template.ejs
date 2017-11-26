@@ -5,12 +5,12 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title><%= htmlWebpackPlugin.options.title %></title>
         <link rel="shortcut icon" href="/icon.ico">
-        <link href="/style/bundle.css" rel="stylesheet">
+        <link href=<%= "/style/bundle.css?v=" + htmlWebpackPlugin.options.version %> rel="stylesheet">
     </head>
     <body>
         <% if (htmlWebpackPlugin.options.appMountId) { %>
         <main id="<%= htmlWebpackPlugin.options.appMountId%>"></main>
         <% } %>
-        <script type="text/javascript" src="/bundle.js"></script>
+        <script src=<%= "/bundle.js?v=" + htmlWebpackPlugin.options.version %> type="text/javascript"></script>
     </body>
 </html>

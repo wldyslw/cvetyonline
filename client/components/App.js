@@ -12,7 +12,7 @@ import {
     NotFound, 
     CatalogPage 
 } from './Content/index'
-import ScrollToTop from './ScrollToTop'
+import ScrollMemory from 'react-router-scroll-memory';
 
 const renderFullLayout = (Component) => ({ match, location }) => {
     return (
@@ -28,8 +28,8 @@ export default (props) => {
     return(
         <Provider store={props.store}>
             <Router>
-                <ScrollToTop>
                     <div>
+                        <ScrollMemory />
                         <Switch>
                             <Route exact path='/' render={renderFullLayout(Home)} />
                             <Route exact path='/catalog/:category' render={renderFullLayout(Catalog)} />
@@ -40,7 +40,6 @@ export default (props) => {
                             <Route component={NotFound} />
                         </Switch>
                     </div>
-                </ScrollToTop>
             </Router>
         </Provider>
     );

@@ -1,21 +1,37 @@
 ActiveAdmin.register Product do
-  # See permitted parameters documentation:
-  # https://github.com/activeadmin/activeadmin/blob/master/docs/2-resource-customization.md#setting-up-strong-parameters
-  #
-  permit_params :name, :description, :category, :in_stock, :featured, unit_products_attributes: [:id, :property, :price], product_images_attributes: [:id, :image]
-  #
-  # or
-  #
-  # permit_params do
-  #   permitted = [:permitted, :attributes]
-  #   permitted << :other if params[:action] == 'create' && current_user.admin?
-  #   permitted
-  # end
+  config.sort_order = 'position_asc'
+  config.paginate = false
+
+  permit_params :name, :description, :category, :in_stock, :featured, unit_products_attributes: [:id, :property, :price, :_destroy], product_images_attributes: [:id, :image, :_destroy]
+
+  orderable
+
+  preserve_default_filters!
+  filter :category, as: :select, collection: {
+    'Букеты' => :bouquets,
+    'Цветы поштучно' => :flowers,
+    'Цветы в горшках' => :pots,
+    'Наши работы' => :handmade,
+    'Букеты невесты' => :wedding,
+    'Подарки' => :gifts
+  }.to_a
 
   index do
+    a 'Reset the order', href: 'products'
+    orderable_handle_column
     selectable_column
     id_column
-    %i[name description category in_stock featured].each { |field| column field }
+    %i[name description in_stock featured].each { |field| column field }
+    column :category do |product|
+      {
+        'bouquets' => 'Букеты',
+        'flowers' => 'Цветы поштучно',
+        'pots' => 'Цветы в горшках',
+        'handmade' => 'Наши работы',
+        'wedding' => 'Букеты невесты',
+        'gifts' => 'Подарки'
+      }[product.category]
+    end
     column :unit_products do |product|
       ul do
         product.unit_products.each { |up| li link_to "#{up.property.empty? ? 'Default' : up.property}, #{up.price}", admin_unit_product_path(up) }
@@ -34,13 +50,13 @@ ActiveAdmin.register Product do
     f.inputs do
       %i[name description in_stock featured].each { |field| f.input field }
       f.input :category, as: :select, collection: options_for_select({
-        'Букеты': :bouquets,
-        'Цветы поштучно': :flowers,
-        'Цветы в горшках': :pots,
-        'Наши работы': :handmade,
-        'Букеты невесты': :wedding,
-        'Подарки': :gifts,
-      }, :bouquets)
+        'Букеты' => :bouquets,
+        'Цветы поштучно' => :flowers,
+        'Цветы в горшках' => :pots,
+        'Наши работы' => :handmade,
+        'Букеты невесты' => :wedding,
+        'Подарки' => :gifts
+      }, f.object.category || :bouquets)
     end
     f.inputs do
       f.has_many :unit_products, allow_destroy: true do |ff|
@@ -49,7 +65,7 @@ ActiveAdmin.register Product do
     end
     f.inputs do
       f.has_many :product_images, allow_destroy: true do |ff|
-        ff.input :image
+        ff.input :image, hint: image_tag(ff.object.image.url(:thumb))
       end
     end
     f.actions

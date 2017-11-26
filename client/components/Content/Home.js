@@ -20,6 +20,8 @@ class Home extends React.Component {
         super(props);
         this.renderCatalog = this.renderCatalog.bind(this);
         this.renderImage = this.renderImage.bind(this);
+        this.parseHeader = this.parseHeader.bind(this);
+        this.parseDescription = this.parseDescription.bind(this);
     }
 
     componentWillMount() {
@@ -29,6 +31,18 @@ class Home extends React.Component {
     renderImage(describer) {
         const imagePath = describer.images.length !== 0 ? `${backend.hostname + describer.images[0].high}` : '/img/missing.png'
         return <img src={imagePath} alt={describer.name} />
+    }
+
+    parseDescription(description) {
+        return description.length > 60
+        ? `${description.slice(0, 59).trim()}...`
+        : description
+    }
+
+    parseHeader(header) {
+        return header.length > 30
+        ? `${header.slice(0, 29).trim()}...`
+        : header
     }
 
     renderCatalog() {
@@ -43,8 +57,8 @@ class Home extends React.Component {
                             <Carousel.Item key={e.id}>
                                 { this.renderImage(e) }
                                 <Carousel.Caption>
-                                    <h3>{e.name}</h3>
-                                    <p>{e.description}</p>
+                                    <h3>{this.parseHeader(e.name)}</h3>
+                                    <p>{this.parseDescription(e.description)}</p>
                                     <LinkContainer exact to={`/catalog/${e.category + '/' + e.id}`}>
                                         <Button bsSize='large' bsStyle='danger'>Узнать больше</Button>
                                     </LinkContainer>

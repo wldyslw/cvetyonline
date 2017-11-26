@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   scope '/api' do
     scope '/v1' do
-      resources :products do
+      resources :products, only: [:index] do
         collection do
           get 'id/:id', action: :show
           get 'name/:name', action: :show

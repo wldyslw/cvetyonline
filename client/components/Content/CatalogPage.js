@@ -115,12 +115,12 @@ class CatalogPage extends React.Component {
                     { this.renderImage() }
                 </Col>
                 <Col className='product' xs={12} sm={6}>
-                        <h3>{e.name}<Badge className="cart-badge">{e.in_stock ? 'В наличии' : 'Нет в наличии'}</Badge></h3>
+                        <h3>{e.name}<Badge className="cart-badge">{e.in_stock ? 'В наличии' : 'Под заказ'}</Badge></h3>
                     <p className='text-muted'>{e.description}</p>
                     <p className='text-muted'>
                        { `Категория: ${categories.find(cat => cat.name == e.category).ally}` }
                     </p>
-                    {this.renderWithOptions()}
+                    {/* {this.renderWithOptions()} */}
                 </Col>
             </div>
         );
