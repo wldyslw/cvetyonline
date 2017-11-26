@@ -65,11 +65,6 @@ module.exports = {
             template: './client/templates/template.ejs',
             appMountId: 'root',
             version: '1.4'
-        }),
-        new webpack.optimize.UglifyJsPlugin()
-    ],
-    devServer: {
-        contentBase: "./public",
-        historyApiFallback: true
-    }
+        })
+    ]
 };
