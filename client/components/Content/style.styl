@@ -24,6 +24,10 @@
         height: 40px;
     }
 
+    img {
+        margin: auto;
+    }
+
     &:hover {
         box-shadow: 0 0 20px rgba(0,0,0,.1);
     }
@@ -43,13 +47,18 @@
         margin: 20px 0;
     }
     .item {
-        height: 80vh !important;
+        height: 500px !important;
         overflow: hidden;
+        @media(max-width: 576px) {
+            height: 400px !important;  
+        }
         img {
-            min-width: 100% !important;
-            min-height: 100% !important;
-            @media (max-width: 768px) {
-                min-width: 180% !important;
+            @media(max-width: 768px) {
+                min-width: 130%;
+            }
+            @media(max-width: 576px) {
+                min-width: 200%;
+                transform: translateX(-25%);
             }
         }
     }
