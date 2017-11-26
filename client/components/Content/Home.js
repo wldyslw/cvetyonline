@@ -40,8 +40,8 @@ class Home extends React.Component {
     }
 
     parseHeader(header) {
-        return header.length > 15
-        ? `${header.slice(0, 14).trim()}...`
+        return header.length > 30
+        ? `${header.slice(0, 29).trim()}...`
         : header
     }
 
