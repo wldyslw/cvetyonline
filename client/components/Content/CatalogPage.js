@@ -31,6 +31,8 @@ class CatalogPage extends React.Component {
         this.renderWithOptions = this.renderWithOptions.bind(this);
         this.changeOption = this.changeOption.bind(this);
         this.renderImage = this.renderImage.bind(this);
+
+        this.renderPrice = this.renderPrice.bind(this);
     }
 
     handleCounter(value) {
@@ -101,6 +103,17 @@ class CatalogPage extends React.Component {
         );
     }
 
+    renderPrice() {
+        const payload = this.props.flowers.payload[0];
+        const unit_products = payload.unit_products;
+        if(unit_products && unit_products.length > 0) {
+            const priceArr = unit_products.map(e => e.price);
+            return <h3 className='product-price'>{`${Math.min(...priceArr)} — ${Math.max(...priceArr)} BYN`}</h3>
+        }
+        else if(payload.price) return <h3 className='product-price'>{`${payload.price} BYN`}</h3>
+        else return <h3 className='product-price'>Цену уточняйте</h3>;
+    }
+
     renderPage() { 
         if(this.props.flowers.isFetching) return <Spinner />
         if(!this.props.flowers.isFetching && !this.props.flowers.payload.length) {
@@ -119,6 +132,7 @@ class CatalogPage extends React.Component {
                        { `Категория: ${categories.find(cat => cat.name == e.category).ally}` }
                     </p>
                     {/* {this.renderWithOptions()} */}
+                    {this.renderPrice()}
                 </Col>
             </div>
         );
