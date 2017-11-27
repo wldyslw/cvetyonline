@@ -38,7 +38,7 @@ export const fetchFlowers = request => dispatch => {
     return fetch(fullRequest, {method: 'GET'})
     .then(data => data.json(), err => console.log(`An error occured while fetching of request ${fullRequest}: ${err}`))
     .then(json => {
-        // console.log(json);
+        if(json == null) return dispatch(recieveFlowers([]))
         return dispatch(recieveFlowers(json.length === undefined ? Array.of(json) : json))
     } )
 }

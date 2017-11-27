@@ -125,3 +125,25 @@ table .close {
     margin-right: 10px;
     font-weight: 100 !important;
 }
+
+.spinner {
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg) }
+    to { transform: rotate(360deg) }
+}
+
+.sort-btn {
+    @media(max-width: 576px) {
+        float: none !important;
+        margin-top: 5px;
+    }
+    .dropdown-menu {
+        @media(min-width: 576px) {
+            right: 0;
+            left: auto;  
+        } 
+    }
+}
