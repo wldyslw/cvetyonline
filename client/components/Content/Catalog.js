@@ -8,6 +8,7 @@ import {
     DropdownButton,
     MenuItem
 } from 'react-bootstrap'
+import Spinner from './Spinner'
 import TradingCard from './TradingCard'
 import { withRouter } from 'react-router'
 import { LinkContainer } from 'react-router-bootstrap'
@@ -36,7 +37,7 @@ class Catalog extends React.Component {
     }
 
     renderCatalog() {
-        if(this.props.flowers.isFetching) return <p>Загрузка...</p>
+        if(this.props.flowers.isFetching) return <Spinner />
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching) {
             return (<p>Раздел пуст.</p>)
         }
@@ -61,7 +62,7 @@ class Catalog extends React.Component {
                         {this.props.flowers.payload
                         ? <Badge className="cart-badge">{this.props.flowers.payload.length}</Badge>
                         : ''}
-                        <div className='pull-right'>
+                        <div className='pull-right sort-btn'>
                             <DropdownButton id='sorting' title={`Сортировка `}>
                                 <MenuItem onClick={() => this.props.sortFlowers('name')}>Имя</MenuItem>
                                 <MenuItem onClick={() => this.props.sortFlowers('price')}>Цена</MenuItem>

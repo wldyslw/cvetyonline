@@ -13,7 +13,8 @@ import {
     FormGroup,
     Carousel
 } from 'react-bootstrap'
-import { withRouter } from 'react-router'
+import Spinner from './Spinner'
+import { withRouter, Redirect } from 'react-router'
 import { connect } from 'react-redux'
 import Counter from './Counter'
 import { fetchFlowers, addToCart } from '../../actions'
@@ -23,23 +24,21 @@ class CatalogPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = { qnty: 1, option: null };
+        const location = this.props.location.pathname.split('/').reverse()[0]
+        this.props.loadProductPage(location.toString());
         this.handleCounter = this.handleCounter.bind(this);
         this.renderPage = this.renderPage.bind(this);
         this.renderWithOptions = this.renderWithOptions.bind(this);
         this.changeOption = this.changeOption.bind(this);
         this.renderImage = this.renderImage.bind(this);
-    }
 
-    componentWillMount() {
-        const location = this.props.location.pathname.split('/').reverse()[0]
-        this.props.loadProductPage(location.toString());
+        this.renderPrice = this.renderPrice.bind(this);
     }
 
     handleCounter(value) {
         this.setState({
             qnty: value
         });
-        //console.log(value);
     }
 
     changeOption(e) {
@@ -54,7 +53,7 @@ class CatalogPage extends React.Component {
         ? this.props.flowers.payload[0].images.map(e => `${backend.hostname + e.high}`)
         : [];
         if(imagePaths.length !== 0) return (
-            <Carousel>
+            <Carousel indicators={imagePaths.length > 1} controls={imagePaths.length > 1} >
                 {imagePaths.map(e => {
                     return (
                         <Carousel.Item key={e}>
@@ -104,10 +103,22 @@ class CatalogPage extends React.Component {
         );
     }
 
-    renderPage() {
-        if(this.props.flowers.isFetching) return <p>Загрузка...</p>
-        if(!this.props.flowers.payload.length && !this.props.flowers.isFetching)
-            return (<p>Раздел пуст.</p>)
+    renderPrice() {
+        const payload = this.props.flowers.payload[0];
+        const unit_products = payload.unit_products;
+        if(unit_products && unit_products.length > 0) {
+            const priceArr = unit_products.map(e => e.price);
+            return <h3 className='product-price'>{`${Math.min(...priceArr)} — ${Math.max(...priceArr)} BYN`}</h3>
+        }
+        else if(payload.price) return <h3 className='product-price'>{`${payload.price} BYN`}</h3>
+        else return <h3 className='product-price'>Цену уточняйте</h3>;
+    }
+
+    renderPage() { 
+        if(this.props.flowers.isFetching) return <Spinner />
+        if(!this.props.flowers.isFetching && !this.props.flowers.payload.length) {
+            return <Redirect to='/not-found' />
+        }
         const e = this.props.flowers.payload[0];
         return (
             <div>
@@ -121,6 +132,7 @@ class CatalogPage extends React.Component {
                        { `Категория: ${categories.find(cat => cat.name == e.category).ally}` }
                     </p>
                     {/* {this.renderWithOptions()} */}
+                    {this.renderPrice()}
                 </Col>
             </div>
         );

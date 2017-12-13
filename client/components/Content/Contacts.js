@@ -34,7 +34,7 @@ class Contacts extends React.Component {
                 <p style={{fontSize: 18, fontWeight: 300}}>
                     ИП Лапицкая О. А. УНП 291368395 <br />
                 </p>
-                <p style={{fontSize: 22, fontWeight: 300}}>Вы всегда можете связаться с нами:</p>
+                <p style={{fontSize: 18, fontWeight: 300}}>Вы всегда можете связаться с нами:</p>
                 <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='home' /> г.Минск, ул. 50 лет Победы, 5а</p>
                 <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /> +375-29-175-08-80</p>
                 <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /> +375-33-377-08-80</p>
