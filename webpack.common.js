@@ -64,7 +64,7 @@ module.exports = {
             favicon: './client/assets/images/icon.ico',
             template: './client/templates/template.ejs',
             appMountId: 'root',
-            version: '1.4'
+            version: '1.4.1'
         })
     ]
 };
