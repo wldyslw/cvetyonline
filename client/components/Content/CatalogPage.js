@@ -148,6 +148,7 @@ class CatalogPage extends React.Component {
                     </p>
                     {/* {this.renderWithOptions()} */}
                     {this.renderPrice()}
+                    <NavLink style={{ marginBottom: 50 }} className='btn cart-btn btn-danger' exact to='/delivery'>Узнать больше об условиях покупки и доставки</NavLink>
                 </Col>
             </div>
         );
