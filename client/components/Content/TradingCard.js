@@ -5,6 +5,7 @@ import {
     Button,
     Glyphicon
 } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom'
 import { backend } from '../../constants'
 import '../../assets/images/missing.png'
 
@@ -62,7 +63,9 @@ class TradingCard extends React.Component {
                     { this.renderImage() }
                 </LinkContainer>                                        
                 <div className='caption'>
-                    <h3>{this.parseHeader(this.props.describer.name)}</h3>                  
+                    <NavLink className='thumbnail__caption' exact to={`/catalog/${this.props.describer.category + '/' + this.props.describer.id}`}>
+                        {this.parseHeader(this.props.describer.name)}
+                    </NavLink>                                      
                     <p>{this.parseDescription(this.props.describer.description)}</p>
                     <hr />
                     <Row className='thumbnail__options'>
