@@ -63,7 +63,7 @@ class TradingCard extends React.Component {
                     { this.renderImage() }
                 </LinkContainer>                                        
                 <div className='caption'>
-                    <NavLink className='thumbnail__caption' exact to={`/catalog/${this.props.describer.category + '/' + this.props.describer.id}`}>
+                    <NavLink title={this.props.describer.name} className='thumbnail__caption' exact to={`/catalog/${this.props.describer.category + '/' + this.props.describer.id}`}>
                         {this.parseHeader(this.props.describer.name)}
                     </NavLink>                                      
                     <p>{this.parseDescription(this.props.describer.description)}</p>
