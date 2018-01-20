@@ -11,11 +11,13 @@ import {
     Glyphicon,
     FormControl,
     FormGroup,
-    Carousel
+    Carousel,
+    Table
 } from 'react-bootstrap'
 import Spinner from './Spinner'
 import { withRouter, Redirect } from 'react-router'
 import { connect } from 'react-redux'
+import { NavLink } from 'react-router-dom'
 import Counter from './Counter'
 import { fetchFlowers, addToCart } from '../../actions'
 import { categories, backend } from '../../constants'
@@ -108,7 +110,19 @@ class CatalogPage extends React.Component {
         const unit_products = payload.unit_products;
         if(unit_products && unit_products.length > 0) {
             const priceArr = unit_products.map(e => e.price);
-            return <h3 className='product-price'>{`${Math.min(...priceArr)} — ${Math.max(...priceArr)} BYN`}</h3>
+            // return <h3 className='product-price'>{`${Math.min(...priceArr)} — ${Math.max(...priceArr)} BYN`}</h3>
+            return (
+                <Table responsive hover>
+                    <tbody>
+                        {unit_products.map(e => (
+                            <tr key={e.id}>
+                                <td>{e.property}</td>
+                                <td className='price'>{`${e.price} BYN`}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </Table>
+            );
         }
         else if(payload.price) return <h3 className='product-price'>{`${payload.price} BYN`}</h3>
         else return <h3 className='product-price'>Цену уточняйте</h3>;
@@ -129,10 +143,12 @@ class CatalogPage extends React.Component {
                         <h3>{e.name}<Badge className="cart-badge">{e.in_stock ? 'В наличии' : 'Под заказ'}</Badge></h3>
                     <p className='text-muted'>{e.description}</p>
                     <p className='text-muted'>
-                       { `Категория: ${categories.find(cat => cat.name == e.category).ally}` }
+                        {`Категория: `}
+                        <NavLink className='category-link' exact to={`/catalog/${e.category}`}>{categories.find(cat => cat.name == e.category).ally}</NavLink>
                     </p>
                     {/* {this.renderWithOptions()} */}
                     {this.renderPrice()}
+                    <NavLink style={{ marginBottom: 50 }} className='btn cart-btn btn-danger' exact to='/delivery'>Узнать больше об условиях покупки и доставки</NavLink>
                 </Col>
             </div>
         );
