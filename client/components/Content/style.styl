@@ -3,11 +3,17 @@
 .grid {
     margin-top: 70px;
     min-height: calc(100vh - 70px);
+    padding-bottom: 50px;
 }
 
-.pageheader h1 {
-    font-size: 30px !important;
-    font-weight: 300 !important;
+.pageheader {
+    h1 {
+        font-size: 30px !important;
+        font-weight: 300 !important;
+    }
+    @media(max-width: 768px) {
+        margin-top: 0;    
+    }
 }
 
 .caption {
@@ -15,36 +21,78 @@
     font-weight: 300 !important;
 }
 
+overflowGradient(h) {
+    content: "";
+    text-align: right;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 30%;
+    height: h;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1) 50%);
+}
+
 .thumbnail {
     padding: 10px;
     border: none;
+    overflow: hidden;
     box-shadow: 0 0 1px rgba(0,0,0,.2);
 
     p {
+        overflow: hidden;
+        position: relative;
         height: 40px;
+        @media(max-width: 992px) {
+            height: 60px;
+        }
+        @media(max-width: 350px) {
+            height: 70px;
+        } 
+        &:after {
+            overflowGradient(1.2em);
+        }
     }
 
     img {
-        margin: auto;
-        height: 230px;
+        display: block;
+        margin: 0 auto !important;
+        height: 240px;
+        width: 240px;
+        @media(max-width: 992px) {
+            height: 120px;
+            width: 120px;
+            margin: 0 20px 0 0 !important;
+        } 
+    }
+
+    h3 {
+        position: relative
+        height: 26px;
+        max-width: 100%;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+        @media(max-width: 992px) {
+            margin-top: 0 !important;
+        } 
+        &:after {
+            overflowGradient(1.2em);
+        }
     }
 
     &:hover {
         box-shadow: 0 0 20px rgba(0,0,0,.1);
     }
-}
 
-.thumbnail__caption {
-    font-weight: 500;
-    display: block;
-    font-size: 24px;
-    margin: 20px 0 10px 0;
-    line-height: 1.1;
-    color: #000;
+    .caption {
+        overflow: hidden;
+        @media(max-width: 992px) {
+            padding: 0 !important;
+        }    
+    }
 
-    &:hover, &:focus {
-        color: #000;
-        text-decoration: none;
+    @media(max-width: 992px) {
+        display: flex;
     }
 }
 
@@ -172,4 +220,8 @@ table .close {
 
 .category-link {
     color: ColorRed;    
+}
+
+p .glyphicon {
+    margin-right: 5px;
 }
