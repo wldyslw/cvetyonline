@@ -1,7 +1,7 @@
 {
   "name": "cvetyonline",
-  "version": "0.1.0",
-  "description": "CvetyOnline web page template",
+  "version": "1.4.1",
+  "description": "CvetyOnline web application",
   "scripts": {
     "start": "webpack-dev-server --progress --colors --config webpack.dev.js",
     "build": "webpack --progress --colors --config webpack.prod.js"

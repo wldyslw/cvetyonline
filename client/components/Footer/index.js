@@ -17,8 +17,8 @@ export default () => (
                     по образцам с использованием сети Интернет» 
                 </p>
                 <p>
-                    ©2017 <a href='http://cvetyonline.by'>CvetyOnline</a>. <br/>
-                    Дизайн и верстка - <a href='https://www.linkedin.com/in/%D0%B2%D0%BB%D0%B0%D0%B4%D0%B8%D1%81%D0%BB%D0%B0%D0%B2-%D0%BC%D0%B0%D0%BB%D1%8C%D1%86%D0%B5%D0%B2-a7b939149/'>Владислав Мальцев</a>
+                    ©{new Date().getFullYear()} <a href='http://cvetyonline.by'>CvetyOnline</a>. <br/>
+                    Разработка - <a href='https://www.linkedin.com/in/%D0%B2%D0%BB%D0%B0%D0%B4%D0%B8%D1%81%D0%BB%D0%B0%D0%B2-%D0%BC%D0%B0%D0%BB%D1%8C%D1%86%D0%B5%D0%B2-a7b939149/'>Владислав Мальцев</a>
                 </p>
             </Col>
             <Col md={4}>
@@ -30,17 +30,17 @@ export default () => (
                     будет особенным!   
                 </p>
                 <p>
-                    Мы особенно ответственно подходим к качеству и стандартам, Вы можете 
-                    быть уверены: букет попадет к получателю в безупречном состоянии! 
-                    Дело за малым - выбрать цветы, подумать о красивой подписи и позвонить нам!
+                    Для оформления заказа с доставкой перейдите по <a href='http://booket.by'>ссылке</a> или позвоните по номеру <a href="tel:+375291750880">+375-29-175-08-80</a>
                 </p>
             </Col>
             <Col md={4}>
                 <h4>Контакты</h4>
                 <p>Вы всегда можете связаться с нами:</p>
-                <p><Glyphicon glyph='phone' /> +375-29-175-08-80</p>
-                <p><Glyphicon glyph='phone' /> +375-33-377-08-80</p>
-                <p><Glyphicon glyph='envelope' /> booket@yandex.by</p>
+                <p><Glyphicon glyph='home' />г.Минск, ул. 50 лет Победы, 5а</p>
+                <p><Glyphicon glyph='phone' /><a href="tel:+375291750880">+375-29-175-08-80</a></p>
+                <p><Glyphicon glyph='phone' /><a href="tel:+375333770880">+375-33-377-08-80</a></p>
+                <p><Glyphicon glyph='phone' /><a href="tel:+375255429443">+375-25-542-94-43</a></p>
+                <p><Glyphicon glyph='envelope' /> <a href="mailto:cvetyonlineby@gmail.com">cvetyonlineby@gmail.com</a></p>
                 <Button href='https://vk.com/club75671531' className='footer__social'><i className="fa fa-vk" aria-hidden="true"></i></Button>
                 <Button href='https://www.facebook.com/booket.by/' className='footer__social'><i className="fa fa-facebook" aria-hidden="true"></i></Button>
                 <Button href='https://www.instagram.com/booket.by/' className='footer__social'><i className="fa fa-instagram" aria-hidden="true"></i></Button>

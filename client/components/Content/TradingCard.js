@@ -5,30 +5,17 @@ import {
     Button,
     Glyphicon
 } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom'
 import { backend } from '../../constants'
 import '../../assets/images/missing.png'
 
 class TradingCard extends React.Component {
     constructor(props) {
         super(props);
-        this.parseDescription = this.parseDescription.bind(this);
         this.renderPrice = this.renderPrice.bind(this);
         this.renderCartButton = this.renderCartButton.bind(this);
         this.renderImage = this.renderImage.bind(this);
-        this.parseHeader = this.parseHeader.bind(this);
     };
-
-    parseDescription(description) {
-        return description.length > 60
-        ? `${description.slice(0, 59).trim()}...`
-        : description
-    }
-
-    parseHeader(header) {
-        return header.length > 15
-        ? `${header.slice(0, 14).trim()}...`
-        : header
-    }
 
     renderPrice() {
         if(this.props.describer.price) return `${this.props.describer.price} BYN`
@@ -57,20 +44,20 @@ class TradingCard extends React.Component {
 
     render() {
         return (
-            <div className="thumbnail">
-                <LinkContainer exact to={`/catalog/${this.props.describer.category + '/' + this.props.describer.id}`}>
+            <LinkContainer exact to={`/catalog/${this.props.describer.category + '/' + this.props.describer.id}`}>
+                <div role='button' className="thumbnail">
                     { this.renderImage() }
-                </LinkContainer>                                        
-                <div className='caption'>
-                    <h3>{this.parseHeader(this.props.describer.name)}</h3>                  
-                    <p>{this.parseDescription(this.props.describer.description)}</p>
-                    <hr />
-                    <Row className='thumbnail__options'>
-                        <h4 className='pull-left'>{this.renderPrice()}</h4>
-                        {/* {this.renderCartButton()} */}
-                    </Row>
+                    <div className='caption'>
+                        <h3 title={this.props.describer.name}>{this.props.describer.name}</h3>
+                        <p>{(this.props.describer.description)}</p>
+                        <hr className='hidden-xs hidden-sm' />
+                        <Row className='thumbnail__options'>
+                            <h4 className='pull-left'>{this.renderPrice()}</h4>
+                            {/* {this.renderCartButton()} */}
+                        </Row>
+                    </div>
                 </div>
-            </div>
+            </LinkContainer>
         );
     };
 }

@@ -60,3 +60,9 @@ Then run project locally:
 ```bash
 npm start
 ```
+
+...or build project for production:
+
+```bash
+npm run build
+```
