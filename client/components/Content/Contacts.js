@@ -30,15 +30,19 @@ class Contacts extends React.Component {
                     быть уверены: букет попадет к получателю в безупречном состоянии! 
                     Дело за малым - выбрать цветы, подумать о красивой подписи и позвонить нам!
                 </p>
+                <p style={{fontSize: 18, fontWeight: 300}}>
+                    Для оформления заказа с доставкой перейдите по <a href='http://booket.by'>ссылке</a> или позвоните по номеру <a href="tel:+375291750880">+375-29-175-08-80</a>
+                </p>
                 <PageHeader className="pageheader">Контакты</PageHeader>
                 <p style={{fontSize: 18, fontWeight: 300}}>
                     ИП Лапицкая О. А. УНП 291368395 <br />
                 </p>
-                <p style={{fontSize: 22, fontWeight: 300}}>Вы всегда можете связаться с нами:</p>
-                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='home' /> г.Минск, ул. 50 лет Победы, 5а</p>
-                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /> +375-29-175-08-80</p>
-                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /> +375-33-377-08-80</p>
-                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='envelope' /> booket@yandex.by</p>
+                <p style={{fontSize: 18, fontWeight: 300}}>Вы всегда можете связаться с нами:</p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='home' />г.Минск, ул. 50 лет Победы, 5а</p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /><a href="tel:+375291750880">+375-29-175-08-80</a></p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /><a href="tel:+375333770880">+375-33-377-08-80</a></p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='phone' /><a href="tel:+375255429443">+375-25-542-94-43</a></p>
+                <p style={{fontSize: 18, fontWeight: 300}}><Glyphicon glyph='envelope' /><a href="mailto:cvetyonlineby@gmail.com">cvetyonlineby@gmail.com</a></p>
             </Grid>
         );
     }

@@ -8,6 +8,7 @@ import {
     Badge,
     PageHeader ,
 } from 'react-bootstrap';
+import Spinner from './Spinner'
 import { LinkContainer } from 'react-router-bootstrap'
 import TradingCard from './TradingCard'
 import { connect } from 'react-redux'
@@ -46,7 +47,7 @@ class Home extends React.Component {
     }
 
     renderCatalog() {
-        if(this.props.flowers.isFetching) return <PageHeader className="pageheader">Загрузка...</PageHeader>
+        if(this.props.flowers.isFetching) return <Spinner />
         if(!this.props.flowers.payload.length && !this.props.flowers.isFetching)
             return <PageHeader className="pageheader">Раздел пуст.</PageHeader>
         return (
