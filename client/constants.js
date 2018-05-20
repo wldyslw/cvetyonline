@@ -17,7 +17,7 @@ export const lorem = {
 };
 
 export const backend = {
-    hostname: 'http://cvetyonline.by',
+    hostname: window.location.origin,
     // hostname: 'http://localhost:3000',
     localhostIP: '46.101.155.51',
     requestBasePath: '/api/v1/products',

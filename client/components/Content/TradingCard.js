@@ -53,7 +53,7 @@ class TradingCard extends React.Component {
                         <hr className='hidden-xs hidden-sm' />
                         <Row className='thumbnail__options'>
                             <h4 className='pull-left'>{this.renderPrice()}</h4>
-                            {/* {this.renderCartButton()} */}
+                            {this.renderCartButton()}
                         </Row>
                     </div>
                 </div>

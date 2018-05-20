@@ -146,9 +146,8 @@ class CatalogPage extends React.Component {
                         {`Категория: `}
                         <NavLink className='category-link' exact to={`/catalog/${e.category}`}>{categories.find(cat => cat.name == e.category).ally}</NavLink>
                     </p>
-                    {/* {this.renderWithOptions()} */}
-                    {this.renderPrice()}
-                    <NavLink style={{ marginBottom: 50 }} className='btn cart-btn btn-danger' exact to='/delivery'>Узнать больше об условиях покупки и доставки</NavLink>
+                    {this.renderWithOptions()}
+                    {/* <NavLink style={{ marginBottom: 50 }} className='btn cart-btn btn-danger' exact to='/delivery'>Узнать больше об условиях покупки и доставки</NavLink> */}
                 </Col>
             </div>
         );

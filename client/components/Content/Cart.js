@@ -137,7 +137,6 @@ class Cart extends React.Component {
     }
 
     render() {
-        // console.log('cart:', this.props.cart)
         const total = this.props.cart.reduce((p, c) => p + c.flower.price * c.qnty, 0)
         if(total == 0) return (
             <Grid className='grid'>
@@ -165,7 +164,7 @@ class Cart extends React.Component {
                                         <Button onClick={() => this.props.remove(e.flower.id)} className='close'>
                                             <Glyphicon glyph='remove' />
                                         </Button>
-                                        <Image className='cart-img' src={backend.hostname + e.flower.image_paths.thumb} />
+                                        <Image className='cart-img' src={backend.hostname + e.flower.images[0].thumb} />
                                     </td>
                                     <td>{e.flower.name}</td>
                                     <td className='hidden-xs'>{`${e.flower.price} BYN`}</td>
