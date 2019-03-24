@@ -11,19 +11,22 @@ export default () => (
                 <Image className="footer__logo" src="/img/logo_white.png" responsive />
                 <p>
                     ИП Лапицкая О. А. УНП 291368395<br />
-                    Интернет-магазин внесен в Торговый реестр РБ<br />
+                    Интернет-витрина внесена в Торговый реестр РБ<br />
                     Регистрационный номер: 365314<br />
                     Свидетельство №291368395 выдано Пинским городским исполнительнм комитетом от 27.07.2015
                 </p>
                 <p>
-                    ©{new Date().getFullYear()} <a href='http://cvetyonline.by'>CvetyOnline</a>. <br/>
-                    Разработка - <a href='https://www.linkedin.com/in/%D0%B2%D0%BB%D0%B0%D0%B4%D0%B8%D1%81%D0%BB%D0%B0%D0%B2-%D0%BC%D0%B0%D0%BB%D1%8C%D1%86%D0%B5%D0%B2-a7b939149/'>Владислав Мальцев</a>
+                    ©{new Date().getFullYear()} <a href='http://cvetyonline.by'>CvetyOnline</a>.
                 </p>
             </Col>
             <Col md={4}>
                 <h4>О нас</h4>
                 <p>Время работы: ПН-ВС 9:00-21:00</p>
-                <p>Доставка по Минску и в пределах 5 километров от МКАД</p>
+                <p>
+                    Адрес нашего магазина: Минский р-н, д. Боровляны, 
+                    ул. 40 лет Победы, 43 (Боровлянский с/с 43)
+                </p>
+                <p>Возможна доставка по Минску и в пределах 5 километров от МКАД</p>
                 <p>
                     Наши флористы специализируются на классических и авторских букетах, 
                     работают с интересом и душой, а значит каждый заказ, будь то 
@@ -41,7 +44,7 @@ export default () => (
                 <p><Glyphicon glyph='phone' /><a href="tel:+375291750880">+375-29-175-08-80</a></p>
                 <p><Glyphicon glyph='phone' /><a href="tel:+375333770880">+375-33-377-08-80</a></p>
                 <p><Glyphicon glyph='phone' /><a href="tel:+375255429443">+375-25-542-94-43</a></p>
-                <p><Glyphicon glyph='envelope' /> <a href="mailto:cvetyonlineby@gmail.com">cvetyonlineby@gmail.com</a></p>
+                <p><Glyphicon glyph='envelope' /> <a href="mailto:T.kichvel@yandex.by">T.kichvel@yandex.by</a></p>
                 <Button href='https://vk.com/club75671531' className='footer__social'><i className="fa fa-vk" aria-hidden="true"></i></Button>
                 <Button href='https://www.facebook.com/booket.by/' className='footer__social'><i className="fa fa-facebook" aria-hidden="true"></i></Button>
                 <Button href='https://www.instagram.com/booket.by/' className='footer__social'><i className="fa fa-instagram" aria-hidden="true"></i></Button>
